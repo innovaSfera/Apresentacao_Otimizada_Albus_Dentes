@@ -1,0 +1,5658 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Proposta de Sistema Integrado Albus Dente - Transformação Digital Completa"
+    />
+    <title>Albus Dente - Proposta de Sistema Integrado</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #030012;
+        --primary-dark: #000000;
+        --primary-light: #1a1a2e;
+        --secondary-color: #95ef4f;
+        --accent-color: #f59e0b;
+        --danger-color: #ef4444;
+        --bg-color: #ffffff;
+        --bg-secondary: #f8fafc;
+        --bg-dark: #0f172a;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --border-color: #e2e8f0;
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+        --spacing-xs: 0.5rem;
+        --spacing-sm: 1rem;
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 3rem;
+        --spacing-2xl: 4rem;
+        --font-family: "Inter", -apple-system, sans-serif;
+      }
+
+      body {
+        font-family: var(--font-family);
+        color: var(--text-primary);
+        background-color: var(--bg-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* InnovaSfera Watermark - Subtle */
+      body::before {
+        content: "";
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 500px;
+        height: 500px;
+        background-image: url('logo-large.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        pointer-events: none;
+        user-select: none;
+        filter: blur(3px);
+        z-index: 0;
+        transform: rotate(-5deg);
+        opacity: 0.03;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--spacing-md);
+      }
+
+      .section {
+        padding: var(--spacing-2xl) 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .section-alt {
+        background-color: var(--bg-secondary);
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: var(--spacing-md);
+      }
+
+      h1 {
+        font-size: 3rem;
+        color: var(--primary-dark);
+      }
+      h2 {
+        font-size: 2.25rem;
+        color: var(--primary-dark);
+      }
+      h3 {
+        font-size: 1.875rem;
+        color: var(--text-primary);
+      }
+      h4 {
+        font-size: 1.5rem;
+        color: var(--text-primary);
+      }
+
+      .subtitle {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        font-weight: 400;
+      }
+
+      .label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary-color);
+        margin-bottom: var(--spacing-xs);
+        display: block;
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--primary-color) 100%
+        );
+        color: white;
+        padding: var(--spacing-sm) 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: var(--shadow-md);
+      }
+
+      .header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-area {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+      }
+
+      .logo-img {
+        height: 44px;
+        width: auto;
+        display: block;
+      }
+
+      .header-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: var(--spacing-lg);
+        list-style: none;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: opacity 0.3s;
+      }
+
+      .nav-menu a:hover {
+        color: #95ef4f;
+        opacity: 1;
+      }
+
+      /* Hero */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          #000000 0%,
+          #030012 50%,
+          #1a1a2e 100%
+        );
+        color: white;
+        padding: var(--spacing-2xl) 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero h1 {
+        color: white;
+        font-size: 3.5rem;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .hero .subtitle {
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: var(--spacing-xl);
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-xl);
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: var(--spacing-lg);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2.25rem;
+        font-weight: 700;
+        display: block;
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .stat-label {
+        font-size: 0.875rem;
+        opacity: 0.9;
+      }
+
+      /* Cards */
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: var(--spacing-lg);
+        box-shadow: var(--shadow-md);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        height: 100%;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .card-icon {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--primary-light)
+        );
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--spacing-md);
+        font-size: 1.875rem;
+        color: white;
+      }
+
+      /* Grid */
+      .grid {
+        display: grid;
+        gap: var(--spacing-lg);
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      /* Accordion Module */
+      .accordion-module {
+        background: white;
+        border-radius: 16px;
+        margin-bottom: var(--spacing-lg);
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+        border: 2px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .accordion-module.active {
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .accordion-header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--primary-color)
+        );
+        color: white;
+        padding: var(--spacing-lg);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .accordion-header:hover {
+        background: linear-gradient(135deg, #000000, #030012);
+      }
+
+      .accordion-header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .accordion-module:hover .accordion-header::after {
+        left: 100%;
+      }
+
+      .module-icon-large {
+        width: 64px;
+        height: 64px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        flex-shrink: 0;
+        transition: transform 0.3s;
+      }
+
+      .accordion-module.active .module-icon-large {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .module-title-area {
+        flex: 1;
+      }
+
+      .module-title-area h3 {
+        color: white;
+        margin: 0 0 0.5rem 0;
+        font-size: 1.5rem;
+      }
+
+      .module-title-area p {
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .accordion-chevron {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        font-size: 1.25rem;
+        transition: transform 0.3s ease;
+      }
+
+      .accordion-module.active .accordion-chevron {
+        transform: rotate(180deg);
+      }
+
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.5s ease-out,
+          padding 0.3s ease-out;
+      }
+
+      .accordion-module.active .accordion-content {
+        max-height: 3000px;
+        transition: max-height 0.8s ease-in;
+      }
+
+      .accordion-body {
+        padding: 0;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .accordion-module.active .accordion-body {
+        padding: var(--spacing-xl);
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+      }
+
+      /* Problem Solution Comparison */
+      .comparison-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+      }
+
+      .problem-column,
+      .solution-column {
+        padding: var(--spacing-lg);
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .problem-column {
+        background: linear-gradient(135deg, #fef2f2, #fee2e2);
+        border-left: 4px solid var(--danger-color);
+        animation: slideInLeft 0.6s ease-out;
+      }
+
+      .solution-column {
+        background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        border-left: 4px solid var(--secondary-color);
+        animation: slideInRight 0.6s ease-out;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .problem-column h4 {
+        color: var(--danger-color);
+        margin-bottom: var(--spacing-md);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .solution-column h4 {
+        color: var(--secondary-color);
+        margin-bottom: var(--spacing-md);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .problem-list,
+      .solution-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .problem-list li {
+        padding: var(--spacing-xs) 0;
+        padding-left: var(--spacing-lg);
+        position: relative;
+        color: #991b1b;
+        opacity: 0;
+        animation: fadeInUp 0.4s ease-out forwards;
+      }
+
+      .problem-list li:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .problem-list li:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .problem-list li:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .problem-list li:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .problem-list li:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .problem-list li:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+
+      .problem-list li::before {
+        content: "❌";
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+      }
+
+      .solution-list li {
+        padding: var(--spacing-xs) 0;
+        padding-left: var(--spacing-lg);
+        position: relative;
+        color: #065f46;
+        opacity: 0;
+        animation: fadeInUp 0.4s ease-out forwards;
+      }
+
+      .solution-list li:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .solution-list li:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .solution-list li:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .solution-list li:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .solution-list li:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .solution-list li:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+
+      .solution-list li::before {
+        content: "✅";
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Benefits Section */
+      .benefits-section {
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        padding: var(--spacing-lg);
+        border-radius: 12px;
+        margin-top: var(--spacing-lg);
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .benefits-section h4 {
+        color: var(--primary-dark);
+        margin-bottom: var(--spacing-md);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+      }
+
+      .benefit-item {
+        background: white;
+        padding: var(--spacing-md);
+        border-radius: 8px;
+        display: flex;
+        align-items: start;
+        gap: var(--spacing-sm);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        opacity: 0;
+        animation: scaleIn 0.4s ease-out forwards;
+      }
+
+      .benefit-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .benefit-item:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .benefit-item:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .benefit-item:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .benefit-item:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .benefit-item:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .benefit-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--secondary-color), #b0f070);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+      }
+
+      .benefit-text {
+        flex: 1;
+      }
+
+      .benefit-text strong {
+        display: block;
+        color: var(--primary-dark);
+        margin-bottom: 0.25rem;
+      }
+
+      .benefit-text span {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      /* Architecture Link Button */
+      .architecture-link {
+        margin-top: var(--spacing-lg);
+        text-align: center;
+        padding-top: var(--spacing-lg);
+        border-top: 1px solid var(--border-color);
+      }
+
+      .architecture-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.875rem 1.75rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--primary-color)
+        );
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(3, 0, 18, 0.3);
+      }
+
+      .architecture-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(149, 239, 79, 0.4);
+        background: linear-gradient(135deg, #95ef4f, #b0f070);
+        color: var(--primary-dark);
+      }
+
+      .architecture-btn i {
+        font-size: 1rem;
+      }
+
+      /* Tech Stack */
+      .tech-stack {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: var(--spacing-lg);
+        margin: var(--spacing-xl) 0;
+      }
+
+      .tech-item {
+        text-align: center;
+        flex: 1;
+        min-width: 150px;
+      }
+
+      .tech-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto var(--spacing-sm);
+        background: linear-gradient(
+          135deg,
+          var(--primary-light),
+          var(--primary-color)
+        );
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: white;
+      }
+
+      /* Table */
+      .table-container {
+        overflow-x: auto;
+        margin: var(--spacing-lg) 0;
+        border-radius: 12px;
+        box-shadow: var(--shadow-md);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+      }
+
+      thead {
+        background: var(--primary-color);
+        color: white;
+      }
+
+      th {
+        padding: var(--spacing-md);
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.875rem;
+      }
+
+      td {
+        padding: var(--spacing-md);
+        border-bottom: 1px solid var(--border-color);
+        font-size: 0.875rem;
+      }
+
+      tr:hover {
+        background: var(--bg-secondary);
+      }
+
+      .table-highlight {
+        background: #fef3c7;
+        font-weight: 600;
+      }
+
+      /* Pricing */
+      .pricing-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-lg);
+      }
+
+      .pricing-card {
+        background: white;
+        border-radius: 12px;
+        padding: var(--spacing-xl);
+        box-shadow: var(--shadow-lg);
+        text-align: center;
+        position: relative;
+        border: 2px solid var(--border-color);
+        transition: all 0.3s;
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--primary-color);
+      }
+
+      .pricing-card.featured {
+        border-color: var(--primary-color);
+        box-shadow: var(--shadow-xl);
+        transform: scale(1.05);
+      }
+
+      .pricing-badge {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent-color);
+        color: white;
+        padding: 4px 16px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .pricing-title {
+        font-size: 1.25rem;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .pricing-price {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: var(--spacing-xs);
+      }
+
+      .pricing-period {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .pricing-features {
+        list-style: none;
+        padding: 0;
+        margin: var(--spacing-lg) 0;
+        text-align: left;
+      }
+
+      .pricing-features li {
+        padding: var(--spacing-xs) 0;
+        padding-left: var(--spacing-lg);
+        position: relative;
+        font-size: 0.875rem;
+      }
+
+      .pricing-features li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--secondary-color);
+        font-weight: 700;
+      }
+
+      /* Badge */
+      .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin: 2px;
+      }
+
+      .badge-success {
+        background: #d1fae5;
+        color: #065f46;
+      }
+
+      .badge-info {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+
+      /* CTA */
+      .cta-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--primary-color) 100%
+        );
+        color: white;
+        padding: var(--spacing-2xl) 0;
+        text-align: center;
+      }
+
+      .cta-section h2 {
+        color: white;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 16px 48px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        font-size: 1.125rem;
+        background: white;
+        color: var(--primary-color);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+        background: #95ef4f;
+        color: var(--primary-dark);
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--bg-dark);
+        color: white;
+        padding: var(--spacing-xl) 0 var(--spacing-lg);
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-xl);
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .footer h5 {
+        color: white;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .footer p,
+      .footer li {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.875rem;
+        line-height: 1.8;
+      }
+
+      .footer ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: var(--spacing-lg);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.875rem;
+      }
+
+      /* Progress bar */
+      .progress-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: var(--accent-color);
+        width: 0%;
+        z-index: 9999;
+        transition: width 0.3s;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .mb-5 {
+        margin-bottom: var(--spacing-xl);
+      }
+      .mt-3 {
+        margin-top: var(--spacing-md);
+      }
+      .mt-5 {
+        margin-top: var(--spacing-xl);
+      }
+
+      /* Responsivo */
+      .notice-content {
+        flex: 1;
+      }
+
+      .notice-content h4 {
+        color: var(--primary-dark);
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .notice-content p,
+      .notice-content ul {
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        margin: 0;
+      }
+
+      .notice-content ul {
+        padding-left: var(--spacing-md);
+        margin-top: 0.5rem;
+      }
+
+      .notice-content ul li {
+        margin-bottom: 0.25rem;
+      }
+
+      /* Pricing detail */
+      .pricing-section-block {
+        margin-bottom: var(--spacing-2xl);
+      }
+
+      .pricing-detail-header {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .pricing-detail-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark),
+          var(--primary-color)
+        );
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+      }
+
+      .pricing-detail-header h3 {
+        margin: 0;
+        color: var(--primary-dark);
+        font-size: 1.375rem;
+      }
+
+      .pricing-detail-header p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      .badge-high {
+        background: #fef9c3;
+        color: #854d0e;
+      }
+
+      .price-value {
+        text-align: right;
+        font-weight: 700;
+        color: var(--primary-dark);
+      }
+
+      .price-total {
+        text-align: right;
+        font-weight: 800;
+        font-size: 1.125rem;
+        color: var(--primary-dark);
+      }
+
+      .azure-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: var(--spacing-lg);
+        margin-top: var(--spacing-lg);
+      }
+
+      /* Pulse animation for accordion hint */
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.6;
+        }
+      }
+
+      .accordion-hint {
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        margin-top: var(--spacing-md);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      /* Notice boxes */
+      .notice-box {
+        border-radius: 12px;
+        padding: var(--spacing-lg);
+        margin-top: var(--spacing-lg);
+        display: flex;
+        gap: var(--spacing-md);
+        align-items: flex-start;
+      }
+
+      .notice-warning {
+        background: linear-gradient(135deg, #fffbeb, #fef3c7);
+        border-left: 4px solid #f59e0b;
+      }
+
+      .notice-hardware {
+        background: linear-gradient(135deg, #fff7ed, #ffedd5);
+        border-left: 4px solid #f97316;
+      }
+
+      .notice-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+        color: white;
+      }
+
+      .notice-warning .notice-icon {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+      }
+
+      .notice-hardware .notice-icon {
+        background: linear-gradient(135deg, #f97316, #ea580c);
+      }
+
+      /* ==================== RESPONSIVE DESIGN ==================== */
+
+      /* Desktop Small (1200px and below) */
+      @media (max-width: 1200px) {
+        .container {
+          padding-left: var(--spacing-lg);
+          padding-right: var(--spacing-lg);
+        }
+
+        .hero h1 {
+          font-size: 3rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.125rem;
+        }
+
+        .module-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .azure-grid {
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+      }
+
+      /* Tablet Landscape (1024px and below) */
+      @media (max-width: 1024px) {
+        h1 {
+          font-size: 2.25rem;
+        }
+
+        h2 {
+          font-size: 1.75rem;
+        }
+
+        .hero h1 {
+          font-size: 2.75rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.05rem;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--spacing-md);
+        }
+
+        .benefit-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .feature-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .azure-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .module-content {
+          padding: var(--spacing-xl);
+        }
+
+        .comparison-container {
+          gap: var(--spacing-lg);
+        }
+
+        .dilution-row {
+          padding: var(--spacing-md);
+        }
+
+        .header-nav {
+          padding: var(--spacing-md) var(--spacing-lg);
+        }
+      }
+
+      /* Tablet Portrait (768px and below) */
+      @media (max-width: 768px) {
+        :root {
+          --spacing-xs: 0.375rem;
+          --spacing-sm: 0.625rem;
+          --spacing-md: 1rem;
+          --spacing-lg: 1.5rem;
+          --spacing-xl: 2rem;
+          --spacing-2xl: 2.5rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        h3 {
+          font-size: 1.25rem;
+        }
+
+        .hero {
+          padding: var(--spacing-2xl) 0;
+          min-height: auto;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+          line-height: 1.1;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+          margin: var(--spacing-md) 0 var(--spacing-lg);
+        }
+
+        .hero-cta {
+          flex-direction: column;
+          gap: var(--spacing-sm);
+        }
+
+        .hero-cta .cta-button,
+        .hero-cta .cta-button-outline {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .header-nav {
+          padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .nav-menu {
+          display: none; /* Hide navigation on mobile */
+        }
+
+        .logout-btn {
+          padding: 0.5rem 1rem;
+          font-size: 0.875rem;
+        }
+
+        .section {
+          padding: var(--spacing-2xl) 0;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-sm);
+        }
+
+        .stat-card {
+          padding: var(--spacing-lg);
+        }
+
+        .stat-value {
+          font-size: 2rem;
+        }
+
+        .comparison-container {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+        }
+
+        .module-item {
+          border-radius: 16px;
+        }
+
+        .module-header {
+          padding: var(--spacing-lg);
+        }
+
+        .module-title-area h3 {
+          font-size: 1.25rem;
+        }
+
+        .module-title-area .module-subtitle {
+          font-size: 0.875rem;
+        }
+
+        .module-content {
+          padding: var(--spacing-lg);
+        }
+
+        .benefit-grid {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+          gap: var(--spacing-md);
+        }
+
+        .azure-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .notice-box {
+          flex-direction: column;
+          padding: var(--spacing-md);
+        }
+
+        .notice-icon {
+          width: 40px;
+          height: 40px;
+          font-size: 1.125rem;
+        }
+
+        .dilution-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--spacing-sm);
+          padding: var(--spacing-md);
+        }
+
+        .dilution-label {
+          font-size: 1rem;
+        }
+
+        .dilution-calculation {
+          width: 100%;
+          padding-left: 0;
+          border-left: none;
+          border-top: 2px solid rgba(149, 239, 79, 0.3);
+          padding-top: var(--spacing-sm);
+        }
+
+        .clinic-count {
+          font-size: 2.5rem;
+        }
+
+        .per-clinic-price {
+          font-size: 1.5rem;
+        }
+
+        .cronograma-table {
+          font-size: 0.875rem;
+        }
+
+        .cronograma-table th,
+        .cronograma-table td {
+          padding: var(--spacing-sm);
+        }
+
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+          gap: var(--spacing-md);
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: var(--spacing-xs);
+        }
+
+        body::after {
+          width: 300px;
+          height: 300px;
+          opacity: 0.02;
+        }
+      }
+
+      /* Mobile Landscape (640px and below) */
+      @media (max-width: 640px) {
+        .container {
+          padding-left: var(--spacing-md);
+          padding-right: var(--spacing-md);
+        }
+
+        .hero h1 {
+          font-size: 2.25rem;
+        }
+
+        .hero-subtitle {
+          font-size: 0.95rem;
+        }
+
+        .module-header {
+          padding: var(--spacing-md);
+        }
+
+        .module-icon {
+          width: 55px;
+          height: 55px;
+          font-size: 1.75rem;
+        }
+
+        .module-title-area h3 {
+          font-size: 1.125rem;
+        }
+
+        .module-content {
+          padding: var(--spacing-md);
+        }
+
+        .benefit-card,
+        .feature-card {
+          padding: var(--spacing-md);
+        }
+
+        .benefit-icon,
+        .feature-icon {
+          width: 50px;
+          height: 50px;
+          font-size: 1.5rem;
+        }
+
+        .stat-card {
+          padding: var(--spacing-md);
+        }
+
+        .stat-value {
+          font-size: 1.75rem;
+        }
+
+        .stat-label {
+          font-size: 0.875rem;
+        }
+
+        .clinic-count {
+          font-size: 2.25rem;
+        }
+
+        .per-clinic-price {
+          font-size: 1.35rem;
+        }
+
+        .savings-badge {
+          font-size: 0.75rem;
+          padding: 0.35rem 0.75rem;
+        }
+      }
+
+      /* Mobile Portrait (480px and below) */
+      @media (max-width: 480px) {
+        :root {
+          --spacing-xs: 0.25rem;
+          --spacing-sm: 0.5rem;
+          --spacing-md: 0.875rem;
+          --spacing-lg: 1.25rem;
+          --spacing-xl: 1.75rem;
+          --spacing-2xl: 2rem;
+        }
+
+        h1 {
+          font-size: 1.75rem;
+        }
+
+        h2 {
+          font-size: 1.35rem;
+        }
+
+        h3 {
+          font-size: 1.125rem;
+        }
+
+        .hero {
+          padding: var(--spacing-xl) 0;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero-subtitle {
+          font-size: 0.9rem;
+          margin: var(--spacing-sm) 0 var(--spacing-md);
+        }
+
+        .cta-button,
+        .cta-button-outline {
+          padding: 0.75rem 1.5rem;
+          font-size: 0.875rem;
+        }
+
+        .header-nav {
+          padding: var(--spacing-sm);
+        }
+
+        .logo-text {
+          font-size: 1.125rem;
+        }
+
+        .logout-btn {
+          padding: 0.45rem 0.875rem;
+          font-size: 0.8rem;
+        }
+
+        .section {
+          padding: var(--spacing-xl) 0;
+        }
+
+        .section-title {
+          font-size: 1.75rem;
+          margin-bottom: var(--spacing-md);
+        }
+
+        .section-subtitle {
+          font-size: 0.9rem;
+        }
+
+        .module-item {
+          border-radius: 12px;
+        }
+
+        .module-header {
+          padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .module-icon {
+          width: 48px;
+          height: 48px;
+          font-size: 1.5rem;
+          border-radius: 10px;
+        }
+
+        .module-title-area h3 {
+          font-size: 1rem;
+        }
+
+        .module-title-area .module-subtitle {
+          font-size: 0.8rem;
+        }
+
+        .module-investment {
+          font-size: 0.875rem;
+        }
+
+        .module-investment strong {
+          font-size: 1rem;
+        }
+
+        .module-content {
+          padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .stat-card {
+          padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .stat-value {
+          font-size: 1.5rem;
+        }
+
+        .stat-label {
+          font-size: 0.8rem;
+        }
+
+        .benefit-card,
+        .feature-card {
+          padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .benefit-icon,
+        .feature-icon {
+          width: 45px;
+          height: 45px;
+          font-size: 1.35rem;
+          border-radius: 8px;
+        }
+
+        .benefit-card h4,
+        .feature-card h4 {
+          font-size: 0.95rem;
+        }
+
+        .benefit-card p,
+        .feature-card p {
+          font-size: 0.85rem;
+        }
+
+        .comparison-card {
+          padding: var(--spacing-md);
+        }
+
+        .comparison-card h4 {
+          font-size: 1rem;
+        }
+
+        .notice-box {
+          padding: var(--spacing-sm) var(--spacing-md);
+          border-radius: 10px;
+        }
+
+        .notice-icon {
+          width: 36px;
+          height: 36px;
+          font-size: 1rem;
+        }
+
+        .notice-content h4 {
+          font-size: 0.95rem;
+        }
+
+        .notice-content p {
+          font-size: 0.85rem;
+        }
+
+        .dilution-row {
+          padding: var(--spacing-sm) var(--spacing-md);
+          border-radius: 10px;
+        }
+
+        .dilution-label {
+          font-size: 0.9rem;
+        }
+
+        .clinic-count {
+          font-size: 2rem;
+        }
+
+        .per-clinic-price {
+          font-size: 1.25rem;
+        }
+
+        .dilution-calc-details {
+          font-size: 0.75rem;
+        }
+
+        .savings-badge {
+          font-size: 0.7rem;
+          padding: 0.3rem 0.65rem;
+        }
+
+        .cronograma-table {
+          font-size: 0.8rem;
+        }
+
+        .cronograma-table th,
+        .cronograma-table td {
+          padding: 0.4rem;
+        }
+
+        .price-table th,
+        .price-table td {
+          padding: var(--spacing-sm);
+          font-size: 0.85rem;
+        }
+
+        .footer {
+          padding: var(--spacing-lg) 0;
+        }
+
+        .footer-logo {
+          font-size: 1.25rem;
+        }
+
+        .footer p {
+          font-size: 0.8rem;
+        }
+
+        body::after {
+          width: 250px;
+          height: 250px;
+          opacity: 0.015;
+        }
+      }
+
+      /* Mobile Small (360px and below) */
+      @media (max-width: 360px) {
+        .hero h1 {
+          font-size: 1.75rem;
+        }
+
+        .hero-subtitle {
+          font-size: 0.85rem;
+        }
+
+        .cta-button,
+        .cta-button-outline {
+          padding: 0.65rem 1.25rem;
+          font-size: 0.8rem;
+        }
+
+        .logo-text {
+          font-size: 1rem;
+        }
+
+        .module-icon {
+          width: 42px;
+          height: 42px;
+          font-size: 1.35rem;
+        }
+
+        .module-title-area h3 {
+          font-size: 0.95rem;
+        }
+
+        .module-title-area .module-subtitle {
+          font-size: 0.75rem;
+        }
+
+        .module-investment {
+          font-size: 0.8rem;
+        }
+
+        .module-investment strong {
+          font-size: 0.9rem;
+        }
+
+        .clinic-count {
+          font-size: 1.75rem;
+        }
+
+        .per-clinic-price {
+          font-size: 1.125rem;
+        }
+
+        .cronograma-table {
+          font-size: 0.75rem;
+        }
+
+        .cronograma-table th,
+        .cronograma-table td {
+          padding: 0.35rem;
+        }
+
+        body::after {
+          width: 200px;
+          height: 200px;
+        }
+      }
+
+      /* Landscape orientation fixes for mobile */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .hero {
+          min-height: auto;
+          padding: var(--spacing-lg) 0;
+        }
+
+        .module-content {
+          max-height: 60vh;
+          overflow-y: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Auth Check Script -->
+    <script>
+      // Verificar autenticação
+      if (sessionStorage.getItem('albusdente_authenticated') !== 'true') {
+        window.location.href = '/';
+      }
+    </script>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator" id="progressBar"></div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="logo-area">
+          <img src="logo-large.svg" alt="Albus Dente" class="logo-img" />
+          <div class="header-title">Proposta Técnica</div>
+        </div>
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="#visao-geral">Visão Geral</a></li>
+            <li><a href="#modulos">Módulos</a></li>
+            <li><a href="#cronograma">Cronograma</a></li>
+            <li><a href="#investimento">Investimento</a></li>
+            <li>
+              <a 
+                href="analise-otimizacao-modulos.html"
+                target="_blank"
+                style="
+                  background: linear-gradient(135deg, #95ef4f 0%, #7cd42a 100%); 
+                  color: #030012; 
+                  border: none;
+                  padding: 0.5rem 1rem; 
+                  border-radius: 8px; 
+                  cursor: pointer; 
+                  font-weight: 700;
+                  font-size: 0.875rem;
+                  transition: all 0.3s ease;
+                  font-family: inherit;
+                  text-decoration: none;
+                  display: inline-block;
+                  box-shadow: 0 2px 8px rgba(149, 239, 79, 0.3);
+                "
+                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(149, 239, 79, 0.4)';"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(149, 239, 79, 0.3)';"
+              >
+                <i class="fas fa-file-invoice"></i> Revisão de Proposta
+              </a>
+            </li>
+            <li>
+              <button 
+                onclick="logout()" 
+                style="
+                  background: rgba(239, 68, 68, 0.1); 
+                  color: #ef4444; 
+                  border: 1px solid rgba(239, 68, 68, 0.3);
+                  padding: 0.5rem 1rem; 
+                  border-radius: 8px; 
+                  cursor: pointer; 
+                  font-weight: 600;
+                  font-size: 0.875rem;
+                  transition: all 0.3s ease;
+                  font-family: inherit;
+                "
+                onmouseover="this.style.background='#ef4444'; this.style.color='white';"
+                onmouseout="this.style.background='rgba(239, 68, 68, 0.1)'; this.style.color='#ef4444';"
+              >
+                <i class="fas fa-sign-out-alt"></i> Sair
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container text-center">
+        <h1>Sistema Integrado Albus Dente</h1>
+        <p class="subtitle">
+          Transforme sua gestão clínica com tecnologia de ponta.<br />
+          Elimine processos manuais. Ganhe eficiência. Aumente resultados.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-number">7</span>
+            <span class="stat-label">Módulos Integrados</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">80%</span>
+            <span class="stat-label">Redução em Trabalho Manual</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Prontuários Digitais</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">24</span>
+            <span class="stat-label">Meses de Desenvolvimento</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visão Geral -->
+    <section id="visao-geral" class="section">
+      <div class="container">
+        <span class="label">Sobre o Projeto</span>
+        <h2>Por Que Investir em um Novo Sistema?</h2>
+        <p class="subtitle mb-5">
+          Sua operação atual está custando mais do que deveria em tempo,
+          dinheiro e oportunidades perdidas.
+        </p>
+
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="card-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h4>Tempo Perdido</h4>
+            <p>
+              <strong>Horas desperdiçadas</strong> preenchendo Excel
+              manualmente, repassando informações entre sistemas, e gerando
+              relatórios que deveriam ser automáticos.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h4>Erros Custosos</h4>
+            <p>
+              <strong>Erros em folha de pagamento</strong>, informações perdidas
+              na comunicação manual, e falta de rastreabilidade comprometem a
+              operação.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h4>Falta de Visão</h4>
+            <p>
+              <strong>Decisões no escuro:</strong> sem métricas em tempo real,
+              impossível identificar gargalos, otimizar recursos ou planejar
+              crescimento.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Módulos Detalhados com Acordeão -->
+    <section id="modulos" class="section section-alt">
+      <div class="container">
+        <span class="label">Solução Completa</span>
+        <h2 class="text-center">7 Módulos que Transformam sua Operação</h2>
+        <p class="subtitle text-center mb-5">
+          Cada módulo foi projetado para resolver problemas reais.
+          <strong>Clique em cada módulo</strong> para ver detalhes.
+        </p>
+        <p class="accordion-hint">
+          <i class="fas fa-hand-pointer"></i> Clique nos módulos abaixo para ver
+          como cada um resolve seus problemas
+        </p>
+
+        <!-- MÓDULO 1 -->
+        <div class="accordion-module" onclick="toggleModule(this)">
+          <div class="accordion-header">
+            <div class="module-icon-large">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="module-title-area">
+              <h3>Módulo 1: Autenticação e Cadastros</h3>
+              <p>Base sólida com segurança e controle de acesso centralizado</p>
+            </div>
+            <div class="accordion-chevron">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <div class="comparison-container">
+                <div class="problem-column">
+                  <h4><i class="fas fa-times-circle"></i> Situação Atual</h4>
+                  <ul class="problem-list">
+                    <li>
+                      <strong>Múltiplos logins</strong> em sistemas diferentes
+                    </li>
+                    <li>
+                      <strong>Falta de controle</strong> sobre quem acessa o quê
+                    </li>
+                    <li><strong>Dados duplicados</strong> entre sistemas</li>
+                    <li><strong>Cadastros manuais repetidos</strong></li>
+                    <li>
+                      <strong>Impossível rastrear</strong> quem fez alterações
+                    </li>
+                  </ul>
+                </div>
+                <div class="solution-column">
+                  <h4>
+                    <i class="fas fa-check-circle"></i> Com o Novo Sistema
+                  </h4>
+                  <ul class="solution-list">
+                    <li><strong>Login único</strong> - uma senha para tudo</li>
+                    <li>
+                      <strong>Perfis de acesso</strong> granulares por função
+                    </li>
+                    <li>
+                      <strong>Cadastro centralizado</strong> - digite uma vez
+                    </li>
+                    <li>
+                      <strong>Multi-tenant</strong> - cada clínica seus dados
+                    </li>
+                    <li><strong>Auditoria completa</strong> - rastreie tudo</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="benefits-section">
+                <h4><i class="fas fa-cubes"></i> Sub-Módulos e Componentes</h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Cadastro de Funcionários</strong>
+                      <span
+                        >Médicos, dentistas, recepcionistas, coordenadores,
+                        assistentes, gestores</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Cadastro de Unidades/Clínicas</strong>
+                      <span
+                        >CIAMEPO (8 clínicas), Sindepress, outras unidades</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Cadastro de Serviços</strong>
+                      <span>Odontologia, médico, laboral, especialidades</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-tags"></i></div>
+                    <div class="benefit-text">
+                      <strong>Tabela de Preços</strong>
+                      <span>Valores por procedimento, convênio, cliente</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-sitemap"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Categorização de Procedimentos</strong>
+                      <span>CID, TUSS, códigos internos, agrupamentos</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-building"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Cadastro de Clientes/Convênios</strong>
+                      <span
+                        >Sindepress, Refeições, Seibref, Siemaco, outros</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-key"></i></div>
+                    <div class="benefit-text">
+                      <strong>SSO - Single Sign-On</strong>
+                      <span>Login único, gestão de permissões por perfil</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Auditoria e Logs</strong>
+                      <span
+                        >Rastreamento completo de todas as ações no
+                        sistema</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Perfis e Permissões</strong>
+                      <span
+                        >Admin, Coordenador, Médico, Recepcionista,
+                        Financeiro</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="benefits-section" style="margin-top: 1.5rem">
+                <h4><i class="fas fa-star"></i> Benefícios Diretos</h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-lock"></i></div>
+                    <div class="benefit-text">
+                      <strong>Segurança Reforçada</strong>
+                      <span>Conformidade LGPD, dados criptografados</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>70% Mais Rápido</strong>
+                      <span>Cadastros em tempo recorde</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-users-cog"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Controle Total</strong>
+                      <span>Permissões detalhadas por usuário</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="architecture-link">
+                <a
+                  href="rascunho.html"
+                  class="architecture-btn"
+                  onclick="event.stopPropagation()"
+                >
+                  <i class="fas fa-project-diagram"></i>
+                  Ver Arquitetura do Sistema
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO 2 -->
+        <div class="accordion-module" onclick="toggleModule(this)">
+          <div class="accordion-header">
+            <div class="module-icon-large">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <div class="module-title-area">
+              <h3>Módulo 2: Agendamento de Consultas</h3>
+              <p>Adeus agenda manual - Olá eficiência e controle total</p>
+            </div>
+            <div class="accordion-chevron">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <div class="comparison-container">
+                <div class="problem-column">
+                  <h4><i class="fas fa-times-circle"></i> DoctorArea Atual</h4>
+                  <ul class="problem-list">
+                    <li><strong>Sem relatórios</strong> - contagem manual</li>
+                    <li>
+                      <strong>Impossível saber</strong> faltas em tempo real
+                    </li>
+                    <li>
+                      <strong>Sem controle</strong> de abertura de agendas
+                    </li>
+                    <li><strong>Sem rastreamento</strong> de quem agendou</li>
+                    <li><strong>Lembretes manuais</strong> em Excel</li>
+                    <li><strong>Sem fila de espera</strong> digital</li>
+                  </ul>
+                </div>
+                <div class="solution-column">
+                  <h4><i class="fas fa-check-circle"></i> Sistema Novo</h4>
+                  <ul class="solution-list">
+                    <li><strong>Calendário visual</strong> intuitivo</li>
+                    <li>
+                      <strong>Relatórios automáticos</strong> instantâneos
+                    </li>
+                    <li>
+                      <strong>Controle centralizado</strong> coordenadores
+                    </li>
+                    <li><strong>Rastreabilidade total</strong> de ações</li>
+                    <li><strong>Lembretes automáticos</strong> (6 meses)</li>
+                    <li><strong>Fila de espera digital</strong> otimizada</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="benefits-section">
+                <h4>
+                  <i class="fas fa-cubes"></i> Arquitetura de Módulos
+                  Necessários
+                </h4>
+                <p
+                  style="
+                    color: var(--text-secondary);
+                    margin-bottom: 1.5rem;
+                    font-size: 0.95rem;
+                  "
+                >
+                  <i class="fas fa-info-circle"></i> Para ter um
+                  <strong>sistema de agendamento digital completo</strong> com
+                  fila de espera, não basta apenas um calendário. É necessária
+                  uma arquitetura robusta de módulos interdependentes:
+                </p>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-user"></i></div>
+                    <div class="benefit-text">
+                      <strong>Módulo de Pacientes</strong>
+                      <span
+                        >Cadastro completo, histórico, documentos,
+                        convênio</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Módulo de Profissionais</strong>
+                      <span
+                        >Médicos, dentistas, CRM/CRO, especialidades,
+                        valores/hora</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Módulo de Agendas</strong>
+                      <span
+                        >Disponibilidade, bloqueios, recorrência, encaixes</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Módulo de Consultas/Agendamentos</strong>
+                      <span>Marcação, status, confirmação, histórico</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-list-ol"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Fila de Espera Digital</strong>
+                      <span
+                        >Priorização, notificações automáticas de vagas</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-bell"></i></div>
+                    <div class="benefit-text">
+                      <strong>Sistema de Notificações</strong>
+                      <span
+                        >Lembretes, confirmações, avisos de retorno (6
+                        meses)</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-clock"></i></div>
+                    <div class="benefit-text">
+                      <strong>Gestão de Horários</strong>
+                      <span>Blocos de 20min, controle de disponibilidade</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-ban"></i></div>
+                    <div class="benefit-text">
+                      <strong>Controle de Faltas e Cancelamentos</strong>
+                      <span>Registro, justificativas, penalidades, multas</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-redo"></i></div>
+                    <div class="benefit-text">
+                      <strong>Gestão de Retornos</strong>
+                      <span>Agendamento automático, período de gratuidade</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="benefits-section" style="margin-top: 1.5rem">
+                <h4><i class="fas fa-star"></i> Benefícios Diretos</h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Métricas em Tempo Real</strong>
+                      <span>Veja tudo o que acontece agora</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>40% Menos Faltas</strong>
+                      <span>Lembretes automáticos eficazes</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Agendas Otimizadas</strong>
+                      <span>Fila preenche horários vagos</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-file-excel"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Zero Excel Manual</strong>
+                      <span>Acabou trabalho de contar consultas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="architecture-link">
+                <a
+                  href="rascunho.html"
+                  class="architecture-btn"
+                  onclick="event.stopPropagation()"
+                >
+                  <i class="fas fa-project-diagram"></i>
+                  Ver Arquitetura do Sistema
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO 3 -->
+        <div class="accordion-module" onclick="toggleModule(this)">
+          <div class="accordion-header">
+            <div class="module-icon-large">
+              <i class="fas fa-ticket-alt"></i>
+            </div>
+            <div class="module-title-area">
+              <h3>Módulo 3: Gestão de Senhas e Fila Digital</h3>
+              <p>Elimine o rádio e a comunicação arcaica</p>
+            </div>
+            <div class="accordion-chevron">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <div class="comparison-container">
+                <div class="problem-column">
+                  <h4><i class="fas fa-times-circle"></i> Hoje</h4>
+                  <ul class="problem-list">
+                    <li><strong>Comunicação via rádio</strong> arcaica</li>
+                    <li>
+                      <strong>Médico vai à recepção</strong> chamar paciente
+                    </li>
+                    <li>
+                      <strong>Fila desorganizada</strong> na recepcionista
+                    </li>
+                    <li><strong>Impossível medir</strong> tempo de espera</li>
+                    <li>
+                      <strong>Reclamações frequentes</strong> sobre demora
+                    </li>
+                  </ul>
+                </div>
+                <div class="solution-column">
+                  <h4><i class="fas fa-check-circle"></i> Amanhã</h4>
+                  <ul class="solution-list">
+                    <li>
+                      <strong>Totem digital</strong> gera senhas automaticamente
+                    </li>
+                    <li>
+                      <strong>Painel de TV</strong> mostra senha em tempo real
+                    </li>
+                    <li>
+                      <strong>Médico chama</strong> do próprio consultório
+                    </li>
+                    <li>
+                      <strong>Notificações instantâneas</strong> (SignalR)
+                    </li>
+                    <li>
+                      <strong>Métricas automáticas</strong> de tempo de fila
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="benefits-section">
+                <h4>
+                  <i class="fas fa-cubes"></i> Componentes do Sistema de Fila
+                  Virtual
+                </h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Sistema de Emissão de Senhas</strong>
+                      <span
+                        >Interface web/totem para gerar senhas por tipo de
+                        atendimento</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-tv"></i></div>
+                    <div class="benefit-text">
+                      <strong>Painel de Exibição (TV/Monitor)</strong>
+                      <span
+                        >Interface web responsiva para TVs mostrarem senhas em
+                        tempo real</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Interface do Médico/Dentista</strong>
+                      <span
+                        >Botão para chamar próximo paciente do consultório</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="benefit-text">
+                      <strong>SignalR - Comunicação Real-time</strong>
+                      <span
+                        >Atualização instantânea em todos os painéis
+                        simultaneamente</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-list"></i></div>
+                    <div class="benefit-text">
+                      <strong>Gestão de Fila por Prioridade</strong>
+                      <span
+                        >Controle de ordem, prioridades especiais,
+                        encaixes</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Métricas de Tempo de Espera</strong>
+                      <span
+                        >Estatísticas automáticas para identificar
+                        gargalos</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="notice-box notice-hardware"
+                style="margin-top: 1.5rem"
+              >
+                <div class="notice-icon">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="notice-content">
+                  <h4>
+                    ⚠️ IMPORTANTE: Escopo de Fornecimento - Sistema de Fila
+                    Virtual
+                  </h4>
+                  <p><strong>O que está INCLUÍDO nesta proposta:</strong></p>
+                  <ul>
+                    <li>
+                      ✅ <strong>Software completo</strong> do sistema de fila
+                      virtual (emissão de senhas, painel, chamadas)
+                    </li>
+                    <li>
+                      ✅ <strong>Interface web responsiva</strong> para exibição
+                      em qualquer TV/monitor conectado à internet
+                    </li>
+                    <li>
+                      ✅ <strong>Sistema de chamada</strong> integrado ao
+                      consultório do médico/dentista
+                    </li>
+                    <li>
+                      ✅ <strong>Métricas e relatórios</strong> de tempo de
+                      espera e fluxo de pacientes
+                    </li>
+                  </ul>
+                  <p style="margin-top: 1rem">
+                    <strong>O que NÃO está incluído:</strong>
+                  </p>
+                  <ul>
+                    <li>
+                      ❌ <strong>Totem físico</strong> (hardware) para emissão
+                      de senhas — cliente pode usar tablets, computadores ou
+                      contratar totem separadamente
+                    </li>
+                    <li>
+                      ❌ <strong>TVs/monitores</strong> para exibição — cliente
+                      utiliza equipamentos próprios
+                    </li>
+                    <li>
+                      ❌ <strong>Token físico NFC/RFID</strong> para controle
+                      preciso de tempo de atendimento
+                    </li>
+                  </ul>
+                  <p
+                    style="margin-top: 1rem; font-size: 0.9rem; color: #059669"
+                  >
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>Alternativa econômica:</strong> O cliente pode usar
+                    tablets ou computadores próprios com navegador web para
+                    emissão de senhas, eliminando necessidade de totem dedicado.
+                  </p>
+                </div>
+              </div>
+
+              <div class="benefits-section" style="margin-top: 1.5rem">
+                <h4><i class="fas fa-star"></i> Benefícios Diretos</h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Experiência do Paciente</strong>
+                      <span>Organização profissional e transparência</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Médico Mais Produtivo</strong>
+                      <span>Não perde tempo indo à recepção</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Dados para Gestão</strong>
+                      <span>Identifique gargalos e otimize fluxo</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Imagem Moderna</strong>
+                      <span>Tecnologia impressiona pacientes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="architecture-link">
+                <a
+                  href="rascunho.html"
+                  class="architecture-btn"
+                  onclick="event.stopPropagation()"
+                >
+                  <i class="fas fa-project-diagram"></i>
+                  Ver Arquitetura do Sistema
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO 4 -->
+        <div class="accordion-module" onclick="toggleModule(this)">
+          <div class="accordion-header">
+            <div class="module-icon-large">
+              <i class="fas fa-file-medical"></i>
+            </div>
+            <div class="module-title-area">
+              <h3>Módulo 4: Ficha Clínica Digital + Azure</h3>
+              <p>Adeus papel - 100% digital, seguro e na nuvem</p>
+            </div>
+            <div class="accordion-chevron">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <div class="comparison-container">
+                <div class="problem-column">
+                  <h4><i class="fas fa-times-circle"></i> Era do Papel</h4>
+                  <ul class="problem-list">
+                    <li>
+                      <strong>Prontuários em papel</strong> - digitalização
+                      manual
+                    </li>
+                    <li>
+                      <strong>Fichas empilhadas</strong> - difícil localizar
+                    </li>
+                    <li><strong>Sem registro fotográfico</strong> adequado</li>
+                    <li><strong>Raio-X físico</strong> - ocupa espaço</li>
+                    <li><strong>Atestados sem validação</strong> - fraudes</li>
+                    <li><strong>Gaps de comunicação</strong> manual</li>
+                  </ul>
+                </div>
+                <div class="solution-column">
+                  <h4><i class="fas fa-check-circle"></i> Era Digital</h4>
+                  <ul class="solution-list">
+                    <li><strong>100% digital</strong> durante consulta</li>
+                    <li><strong>Upload fotos/raio-X</strong> no Azure Blob</li>
+                    <li><strong>Odontograma digital</strong> interativo</li>
+                    <li>
+                      <strong>Receitas digitais</strong> com assinatura
+                      ICP-Brasil*
+                    </li>
+                    <li>
+                      <strong>Atestados com QR Code</strong> (conforme
+                      legislação)
+                    </li>
+                    <li><strong>Orientações integradas</strong> - sem gaps</li>
+                    <li><strong>Histórico completo</strong> em um clique</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="benefits-section">
+                <h4>
+                  <i class="fas fa-cubes"></i> Componentes da Ficha Clínica
+                  Digital
+                </h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Anamnese Digital</strong>
+                      <span
+                        >Questionários personalizáveis, histórico médico
+                        completo</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-tooth"></i></div>
+                    <div class="benefit-text">
+                      <strong>Odontograma Interativo</strong>
+                      <span
+                        >Visual por faces do dente, códigos TUSS, histórico de
+                        procedimentos</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-file-prescription"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Emissão de Receitas Digitais</strong>
+                      <span
+                        >Template por cliente, assinatura digital ICP-Brasil,
+                        banco de medicamentos</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Atestados com QR Code</strong>
+                      <span
+                        >Conforme legislação, validação online,
+                        anti-fraude</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Upload de Imagens</strong>
+                      <span
+                        >Fotos clínicas, raio-X, exames, armazenamento
+                        Azure</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Anexo de Documentos</strong>
+                      <span
+                        >Digitalização de fichas antigas, exames externos,
+                        laudos</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-procedures"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Registro de Procedimentos</strong>
+                      <span
+                        >Codificação TUSS/CID, valores, autorização, lote</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-notes-medical"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Evolução Clínica</strong>
+                      <span
+                        >Anotações do profissional, histórico completo por
+                        data</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-comment-medical"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Orientações Pós-Consulta</strong>
+                      <span
+                        >Registro integrado (retorno, exames, cuidados)</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-file-signature"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Termo de Consentimento</strong>
+                      <span
+                        >Digital, assinatura eletrônica, armazenamento
+                        seguro</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Integração Azure Blob Storage</strong>
+                      <span
+                        >Armazenamento seguro e escalável de todos os
+                        arquivos</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Identidade Visual por Cliente</strong>
+                      <span
+                        >Logo e layout personalizado (Sindepress, Seibref,
+                        etc)</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="benefits-section" style="margin-top: 1.5rem">
+                <h4><i class="fas fa-star"></i> Benefícios Diretos</h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-leaf"></i></div>
+                    <div class="benefit-text">
+                      <strong>Economia com Papel</strong>
+                      <span>Fim do gasto com impressão e armazenamento</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-search"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Acesso Instantâneo</strong>
+                      <span>Busque qualquer prontuário em segundos</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Backup Automático</strong>
+                      <span>Dados seguros na nuvem Azure</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-gavel"></i></div>
+                    <div class="benefit-text">
+                      <strong>Compliance Legal</strong>
+                      <span>QR Code, LGPD, auditoria completa</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Documentação Fotográfica</strong>
+                      <span>Antes/depois organizado e profissional</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Zero Gaps</strong>
+                      <span>Orientações aparecem automaticamente</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="notice-box notice-warning">
+                <div class="notice-icon">
+                  <i class="fas fa-certificate"></i>
+                </div>
+                <div class="notice-content">
+                  <h4>
+                    📋 Requisito: Certificado Digital para Receitas Digitais
+                  </h4>
+                  <p>
+                    Receitas médicas e odontológicas digitais com validade
+                    jurídica exigem assinatura com
+                    <strong>Certificado Digital ICP-Brasil</strong> (padrão A1
+                    ou A3) de cada profissional emissor, conforme regulamentação
+                    CFM/CFO.
+                  </p>
+                  <ul>
+                    <li>
+                      <strong
+                        >O certificado é de responsabilidade de cada
+                        médico/dentista</strong
+                      >
+                      — não é fornecido nem custeado pelo sistema.
+                    </li>
+                    <li>
+                      Custo aproximado: R$ 150–350/ano por profissional, emitido
+                      por certificadoras credenciadas (Serasa, Valid, Soluti,
+                      entre outras).
+                    </li>
+                    <li>
+                      O sistema integra a assinatura automaticamente após o
+                      profissional instalar o certificado no dispositivo.
+                    </li>
+                    <li>
+                      Sem certificado: receitas geradas em PDF sem assinatura
+                      digital (disponíveis apenas para impressão).
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="architecture-link">
+                <a
+                  href="rascunho.html"
+                  class="architecture-btn"
+                  onclick="event.stopPropagation()"
+                >
+                  <i class="fas fa-project-diagram"></i>
+                  Ver Arquitetura do Sistema
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO 5 -->
+        <div class="accordion-module" onclick="toggleModule(this)">
+          <div class="accordion-header">
+            <div class="module-icon-large">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="module-title-area">
+              <h3>Módulo 5: Relatórios e Business Intelligence</h3>
+              <p>
+                Acabou Excel manual - Relatórios Analíticos e Sintéticos em
+                tempo real
+              </p>
+            </div>
+            <div class="accordion-chevron">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <div class="comparison-container">
+                <div class="problem-column">
+                  <h4><i class="fas fa-times-circle"></i> Excel Hell</h4>
+                  <ul class="problem-list">
+                    <li>
+                      <strong>Relatórios manuais</strong> - horas perdidas
+                    </li>
+                    <li><strong>Contagem manual</strong> de tudo</li>
+                    <li><strong>Sem tempo real</strong> - só fim do mês</li>
+                    <li><strong>Sem identificar gargalos</strong></li>
+                    <li>
+                      <strong>Horas para folha</strong> digitadas manualmente
+                    </li>
+                    <li><strong>Sistema trava</strong> ao gerar relatórios</li>
+                  </ul>
+                </div>
+                <div class="solution-column">
+                  <h4>
+                    <i class="fas fa-check-circle"></i> Dashboard Inteligente
+                  </h4>
+                  <ul class="solution-list">
+                    <li>
+                      <strong>Dashboard tempo real</strong> - veja tudo agora
+                    </li>
+                    <li><strong>1 clique</strong> - relatórios completos</li>
+                    <li>
+                      <strong>Filtros avançados</strong> - data, profissional,
+                      unidade
+                    </li>
+                    <li>
+                      <strong>Analíticos e Sintéticos</strong> - do geral ao
+                      detalhe
+                    </li>
+                    <li>
+                      <strong>Exporta Excel/PDF</strong> quando necessário
+                    </li>
+                    <li><strong>Gráficos visuais</strong> - entenda rápido</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="benefits-section">
+                <h4><i class="fas fa-layer-group"></i> Tipos de Relatórios</h4>
+                <div
+                  style="
+                    background: white;
+                    padding: 1.5rem;
+                    border-radius: 8px;
+                    margin-bottom: 1.5rem;
+                  "
+                >
+                  <h5
+                    style="
+                      color: var(--primary-dark);
+                      margin-bottom: 1rem;
+                      font-size: 1.1rem;
+                    "
+                  >
+                    <i class="fas fa-compress-alt"></i> Relatórios SINTÉTICOS
+                    (Visão Executiva)
+                  </h5>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      margin-bottom: 1rem;
+                      font-size: 0.95rem;
+                    "
+                  >
+                    Fornecem <strong>visão consolidada e resumida</strong>,
+                    ideal para gestores e coordenadores tomarem decisões
+                    rápidas:
+                  </p>
+                  <ul
+                    style="
+                      list-style: none;
+                      padding-left: 0;
+                      display: grid;
+                      gap: 0.5rem;
+                    "
+                  >
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #10b981"
+                      ></i>
+                      <strong>Total de consultas por unidade</strong>
+                      (mensal/anual)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #10b981"
+                      ></i>
+                      <strong>Taxa de ocupação</strong> das agendas (% de
+                      aproveitamento)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #10b981"
+                      ></i>
+                      <strong>Indicadores de faltas e cancelamentos</strong> (%
+                      geral)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #10b981"
+                      ></i>
+                      <strong>Resumo financeiro</strong> (faturamento x despesas
+                      por unidade)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #10b981"
+                      ></i>
+                      <strong>Horas trabalhadas consolidadas</strong> por
+                      profissional (para folha)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #10b981"
+                      ></i>
+                      <strong>Produtividade por especialidade</strong>
+                      (pacientes/hora)
+                    </li>
+                  </ul>
+                </div>
+
+                <div
+                  style="background: white; padding: 1.5rem; border-radius: 8px"
+                >
+                  <h5
+                    style="
+                      color: var(--primary-dark);
+                      margin-bottom: 1rem;
+                      font-size: 1.1rem;
+                    "
+                  >
+                    <i class="fas fa-expand-alt"></i> Relatórios ANALÍTICOS
+                    (Visão Detalhada)
+                  </h5>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      margin-bottom: 1rem;
+                      font-size: 0.95rem;
+                    "
+                  >
+                    Fornecem <strong>detalhamento granular</strong> com todas as
+                    linhas de dados, ideal para auditoria, análise profunda e
+                    investigação:
+                  </p>
+                  <ul
+                    style="
+                      list-style: none;
+                      padding-left: 0;
+                      display: grid;
+                      gap: 0.5rem;
+                    "
+                  >
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #06b6d4"
+                      ></i>
+                      <strong>Lista completa de consultas</strong> (paciente,
+                      data, hora, profissional, status, procedimentos)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #06b6d4"
+                      ></i>
+                      <strong>Detalhamento de faltas</strong> (quem faltou,
+                      quando, justificativa, histórico de recorrência)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #06b6d4"
+                      ></i>
+                      <strong>Relatório de procedimentos realizados</strong>
+                      (código TUSS, valor, autorização, lote)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #06b6d4"
+                      ></i>
+                      <strong>Horas detalhadas por profissional</strong> (agenda
+                      por agenda, dia/hora, valor unitário)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #06b6d4"
+                      ></i>
+                      <strong>Movimentação financeira linha a linha</strong>
+                      (contas, notas fiscais, pagamentos)
+                    </li>
+                    <li style="padding-left: 1.5rem; position: relative">
+                      <i
+                        class="fas fa-check-circle"
+                        style="position: absolute; left: 0; color: #06b6d4"
+                      ></i>
+                      <strong>Auditoria de ações</strong> (quem fez o quê,
+                      quando, log completo)
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="benefits-section" style="margin-top: 1.5rem">
+                <h4>
+                  <i class="fas fa-cubes"></i> Principais Relatórios do Sistema
+                </h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Produtividade por Profissional</strong>
+                      <span>Consultas, procedimentos, horas, faturamento</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-user-clock"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Folha de Pagamento</strong>
+                      <span>Horas x valor, cálculo automático para RH</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-ban"></i></div>
+                    <div class="benefit-text">
+                      <strong>Faltas e Cancelamentos</strong>
+                      <span
+                        >Por paciente, profissional, unidade,
+                        justificativas</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Gross Profit</strong>
+                      <span
+                        >Faturamento x custos, margem por unidade/serviço</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Fechamento Mensal</strong>
+                      <span
+                        >Receitas, despesas, fluxo de caixa consolidado</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Desempenho por Unidade</strong>
+                      <span>Ranking de clínicas, ocupação, faturamento</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="benefits-section">
+                <h4><i class="fas fa-star"></i> Benefícios Diretos</h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-stopwatch"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>80% Economia de Tempo</strong>
+                      <span>Horas viram segundos</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-bullseye"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Decisões Inteligentes</strong>
+                      <span>Baseadas em dados reais</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-eye"></i></div>
+                    <div class="benefit-text">
+                      <strong>Visibilidade Total</strong>
+                      <span>Todas as clínicas em uma tela</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Alertas Automáticos</strong>
+                      <span>Sistema avisa anomalias</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="notice-box notice-hardware">
+                <div class="notice-icon">
+                  <i class="fas fa-stopwatch"></i>
+                </div>
+                <div class="notice-content">
+                  <h4>
+                    ⚠️ Relatório de Tempo de Atendimento — Precisão Limitada sem
+                    Hardware
+                  </h4>
+                  <p>
+                    O relatório de <strong>tempo por consulta</strong> tem
+                    precisão variável conforme a disponibilidade de hardware
+                    dedicado:
+                  </p>
+                  <ul>
+                    <li>
+                      <strong>Com token de atendimento (NFC/RFID):</strong>
+                      precisão exata — médico aciona o dispositivo ao iniciar e
+                      encerrar cada consulta.
+                    </li>
+                    <li>
+                      <strong>Sem hardware (padrão desta proposta):</strong>
+                      tempo estimado via eventos do sistema (abertura e
+                      fechamento do prontuário).
+                    </li>
+                    <li>
+                      O token de atendimento
+                      <strong>não está incluído</strong> nesta proposta e pode
+                      ser cotado separadamente como escopo futuro.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="architecture-link">
+                <a
+                  href="rascunho.html"
+                  class="architecture-btn"
+                  onclick="event.stopPropagation()"
+                >
+                  <i class="fas fa-project-diagram"></i>
+                  Ver Arquitetura do Sistema
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO 6 - OCULTO (Financeiro e Faturamento) 
+        <div class="accordion-module" onclick="toggleModule(this)">
+          <div class="accordion-header">
+            <div class="module-icon-large">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="module-title-area">
+              <h3>Módulo 6: Financeiro e Faturamento</h3>
+              <p>Da consulta ao pagamento bancário - tudo automático</p>
+            </div>
+            <div class="accordion-chevron">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <div class="comparison-container">
+                <div class="problem-column">
+                  <h4><i class="fas fa-times-circle"></i> Planilhas e Erros</h4>
+                  <ul class="problem-list">
+                    <li>
+                      <strong>Folha manual</strong> - contar horas manualmente
+                    </li>
+                    <li><strong>Erros frequentes</strong> em cálculos</li>
+                    <li>
+                      <strong>CNAB manual</strong> - digitação propensa a erros
+                    </li>
+                    <li><strong>NF manual</strong> em cada portal</li>
+                    <li><strong>Fechamento demora dias</strong></li>
+                    <li>
+                      <strong>Gross Profit</strong> em planilhas complexas
+                    </li>
+                  </ul>
+                </div>
+                <div class="solution-column">
+                  <h4><i class="fas fa-check-circle"></i> Automação Total</h4>
+                  <ul class="solution-list">
+                    <li>
+                      <strong>Folha automática</strong> - baseada em horas
+                      trabalhadas
+                    </li>
+                    <li>
+                      <strong>CNAB em 1 clique</strong> - pronto pro banco
+                    </li>
+                    <li><strong>NF-e automatizada</strong> (fase futura)</li>
+                    <li><strong>Contas a pagar/receber</strong> com alertas</li>
+                    <li><strong>Fechamento instantâneo</strong></li>
+                    <li>
+                      <strong>Gross Profit calculado</strong> automaticamente
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="benefits-section">
+                <h4>
+                  <i class="fas fa-cubes"></i> Módulos e Funcionalidades
+                  Financeiras
+                </h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-money-check-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Contas a Pagar</strong>
+                      <span
+                        >Fornecedores, vencimentos, alertas, categorização,
+                        rateio entre unidades</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Contas a Receber</strong>
+                      <span
+                        >Clientes/convênios, faturamento, baixas, conciliação
+                        bancária</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Geração de Boletos</strong>
+                      <span
+                        >Emissão automática, remessa bancária, retorno
+                        processado</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-receipt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Emissão de NF-e (Futuro)</strong>
+                      <span
+                        >Integração com portais municipais, automação
+                        fiscal</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Folha de Pagamento</strong>
+                      <span
+                        >Baseada em horas trabalhadas, valores diferenciados por
+                        profissional</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-university"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Arquivo CNAB (Remessa Bancária)</strong>
+                      <span
+                        >Geração automática para pagamento de
+                        médicos/fornecedores</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Gross Profit</strong>
+                      <span
+                        >Faturamento x custos, margem de lucro por
+                        unidade/serviço</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-boxes"></i></div>
+                    <div class="benefit-text">
+                      <strong>Gestão de Estoque</strong>
+                      <span
+                        >Controle de insumos, compras, rateio entre
+                        clínicas</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Centro de Custos</strong>
+                      <span
+                        >Despesas por clínica, por área, por
+                        cliente/convênio</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Contratos e Recorrências</strong>
+                      <span
+                        >Gestão de clientes fixos, faturamento recorrente</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Multas e Advertências</strong>
+                      <span>Cálculo automático, relatórios para sindicato</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Fechamento Mensal</strong>
+                      <span
+                        >Consolidação automática de receitas e despesas</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="benefits-section" style="margin-top: 1.5rem">
+                <h4><i class="fas fa-star"></i> Benefícios Diretos</h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>95% Menos Erros</strong>
+                      <span>Cálculos automáticos precisos</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Dias Viram Minutos</strong>
+                      <span>Fechamento ultra rápido</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Fluxo Previsível</strong>
+                      <span>Saiba exatamente quanto vai entrar/sair</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-university"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Integração Bancária</strong>
+                      <span>Envio automático de pagamentos</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="architecture-link">
+                <a
+                  href="rascunho.html"
+                  class="architecture-btn"
+                  onclick="event.stopPropagation()"
+                >
+                  <i class="fas fa-project-diagram"></i>
+                  Ver Arquitetura do Sistema
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        -->
+
+        <!-- MÓDULO 7 -->
+        <div class="accordion-module" onclick="toggleModule(this)">
+          <div class="accordion-header">
+            <div class="module-icon-large">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div class="module-title-area">
+              <h3>Módulo 6: Comunicação e Follow-up</h3>
+              <p>Comunicação eficiente e relacionamento com pacientes</p>
+            </div>
+            <div class="accordion-chevron">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <div class="comparison-container">
+                <div class="problem-column">
+                  <h4>
+                    <i class="fas fa-times-circle"></i> Comunicação Informal
+                  </h4>
+                  <ul class="problem-list">
+                    <li><strong>Rádio para chamar assistente</strong></li>
+                    <li><strong>Sem follow-up sistematizado</strong></li>
+                    <li><strong>Impossível avaliar satisfação</strong></li>
+                    <li><strong>Visitas presenciais obrigatórias</strong></li>
+                    <li><strong>Informações se perdem</strong></li>
+                  </ul>
+                </div>
+                <div class="solution-column">
+                  <h4>
+                    <i class="fas fa-check-circle"></i> Comunicação Digital
+                  </h4>
+                  <ul class="solution-list">
+                    <li><strong>Chamados digitais</strong> pelo sistema</li>
+                    <li><strong>Follow-up automatizado</strong></li>
+                    <li><strong>Sistema de avaliações</strong> (futuro)</li>
+                    <li><strong>Gestão remota</strong> completa</li>
+                    <li><strong>Tudo registrado</strong> e rastreável</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="benefits-section">
+                <h4>
+                  <i class="fas fa-cubes"></i> O que Vamos Desenvolver em
+                  Comunicação
+                </h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Chamados Internos Digitais</strong>
+                      <span
+                        >Médico solicita assistente/limpeza diretamente no
+                        sistema (substitui rádio)</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-bell"></i></div>
+                    <div class="benefit-text">
+                      <strong>Sistema de Notificações Push</strong>
+                      <span
+                        >Alertas em tempo real para coordenadores e
+                        equipes</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Comunicados e Avisos</strong>
+                      <span
+                        >Publicação de avisos para profissionais, pacientes,
+                        setores</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Chat Interno (Futuro - Fase 2)</strong>
+                      <span
+                        >Mensagens entre profissionais da mesma unidade</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-star"></i></div>
+                    <div class="benefit-text">
+                      <strong>Sistema de Avaliações (Futuro - Fase 2)</strong>
+                      <span
+                        >Pacientes avaliam atendimento por setores (médico,
+                        recepção, limpeza)</span
+                      >
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-tasks"></i></div>
+                    <div class="benefit-text">
+                      <strong>Checklist de Visitas (Coordenadoras)</strong>
+                      <span
+                        >Sistema digital similar ao Monday para gestão de
+                        visitas</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="benefits-section" style="margin-top: 1.5rem">
+                <h4><i class="fas fa-star"></i> Benefícios Diretos</h4>
+                <div class="benefits-grid">
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-smile"></i></div>
+                    <div class="benefit-text">
+                      <strong>Satisfação do Paciente</strong>
+                      <span>Follow-up demonstra cuidado</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon"><i class="fas fa-bell"></i></div>
+                    <div class="benefit-text">
+                      <strong>Comunicação Instantânea</strong>
+                      <span>Nada se perde, tudo registrado</span>
+                    </div>
+                  </div>
+                  <div class="benefit-item">
+                    <div class="benefit-icon">
+                      <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="benefit-text">
+                      <strong>Gestão Remota</strong>
+                      <span>Coordenadores veem tudo online</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="architecture-link">
+                <a
+                  href="rascunho.html"
+                  class="architecture-btn"
+                  onclick="event.stopPropagation()"
+                >
+                  <i class="fas fa-project-diagram"></i>
+                  Ver Arquitetura do Sistema
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Infraestrutura -->
+    <section class="section section-alt">
+      <div class="container">
+        <span class="label">Infraestrutura e Hospedagem</span>
+        <h2 class="text-center">Infraestrutura Azure Cloud</h2>
+        <p class="subtitle text-center mb-5">
+          <i class="fas fa-info-circle"></i>
+          <strong>Importante:</strong> Infraestrutura
+          <strong>NÃO é um módulo de desenvolvimento</strong> — é o custo
+          operacional mensal de hospedagem, armazenamento e recursos de nuvem
+          Microsoft Azure.
+        </p>
+
+        <div
+          class="card"
+          style="
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-left: 4px solid #3b82f6;
+            padding: 2rem;
+            margin-bottom: 2rem;
+          "
+        >
+          <h3
+            style="
+              color: var(--primary-dark);
+              margin-bottom: 1.5rem;
+              display: flex;
+              align-items: center;
+              gap: 0.75rem;
+            "
+          >
+            <i
+              class="fab fa-microsoft"
+              style="font-size: 2rem; color: #3b82f6"
+            ></i>
+            Por que Azure Cloud?
+          </h3>
+          <div class="grid grid-2" style="gap: 1.5rem">
+            <div>
+              <h4
+                style="
+                  color: var(--primary-dark);
+                  font-size: 1rem;
+                  margin-bottom: 0.75rem;
+                "
+              >
+                <i class="fas fa-check-circle" style="color: #10b981"></i>
+                Vantagens Técnicas
+              </h4>
+              <ul
+                style="
+                  list-style: none;
+                  padding-left: 0;
+                  color: var(--text-primary);
+                  font-size: 0.95rem;
+                "
+              >
+                <li
+                  style="
+                    padding: 0.4rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+                  "
+                >
+                  <i
+                    class="fas fa-arrow-right"
+                    style="position: absolute; left: 0; color: #3b82f6"
+                  ></i>
+                  <strong>Escalabilidade automática</strong> — cresce conforme
+                  demanda
+                </li>
+                <li
+                  style="
+                    padding: 0.4rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+                  "
+                >
+                  <i
+                    class="fas fa-arrow-right"
+                    style="position: absolute; left: 0; color: #3b82f6"
+                  ></i>
+                  <strong>Backup diário automatizado</strong> — dados sempre
+                  protegidos
+                </li>
+                <li
+                  style="
+                    padding: 0.4rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+                  "
+                >
+                  <i
+                    class="fas fa-arrow-right"
+                    style="position: absolute; left: 0; color: #3b82f6"
+                  ></i>
+                  <strong>SLA 99.9%</strong> de disponibilidade garantida
+                </li>
+                <li
+                  style="
+                    padding: 0.4rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+                  "
+                >
+                  <i
+                    class="fas fa-arrow-right"
+                    style="position: absolute; left: 0; color: #3b82f6"
+                  ></i>
+                  <strong>Disaster Recovery</strong> automático
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4
+                style="
+                  color: var(--primary-dark);
+                  font-size: 1rem;
+                  margin-bottom: 0.75rem;
+                "
+              >
+                <i class="fas fa-shield-alt" style="color: #10b981"></i>
+                Segurança e Compliance
+              </h4>
+              <ul
+                style="
+                  list-style: none;
+                  padding-left: 0;
+                  color: var(--text-primary);
+                  font-size: 0.95rem;
+                "
+              >
+                <li
+                  style="
+                    padding: 0.4rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+                  "
+                >
+                  <i
+                    class="fas fa-arrow-right"
+                    style="position: absolute; left: 0; color: #3b82f6"
+                  ></i>
+                  <strong>Conformidade LGPD</strong> e ISO 27001
+                </li>
+                <li
+                  style="
+                    padding: 0.4rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+                  "
+                >
+                  <i
+                    class="fas fa-arrow-right"
+                    style="position: absolute; left: 0; color: #3b82f6"
+                  ></i>
+                  <strong>Criptografia de dados</strong> em repouso e trânsito
+                </li>
+                <li
+                  style="
+                    padding: 0.4rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+                  "
+                >
+                  <i
+                    class="fas fa-arrow-right"
+                    style="position: absolute; left: 0; color: #3b82f6"
+                  ></i>
+                  <strong>Firewall e proteção DDoS</strong> nativos
+                </li>
+                <li
+                  style="
+                    padding: 0.4rem 0;
+                    padding-left: 1.5rem;
+                    position: relative;
+                  "
+                >
+                  <i
+                    class="fas fa-arrow-right"
+                    style="position: absolute; left: 0; color: #3b82f6"
+                  ></i>
+                  <strong>Auditoria de acesso</strong> e logs completos
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <h3
+          style="
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+          "
+        >
+          <i class="fas fa-server"></i> Componentes de Infraestrutura
+        </h3>
+
+        <div class="grid grid-3" style="margin-bottom: 3rem">
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background: linear-gradient(135deg, #3b82f6, #60a5fa)"
+            >
+              <i class="fas fa-server"></i>
+            </div>
+            <h4>Azure App Service</h4>
+            <p
+              style="
+                color: var(--text-secondary);
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+              "
+            >
+              Hospedagem da aplicação web (frontend e backend)
+            </p>
+            <ul style="list-style: none; padding: 0; font-size: 0.875rem">
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i> Auto-scaling
+                conforme demanda
+              </li>
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i> SSL/HTTPS
+                automático
+              </li>
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i> Deploy
+                contínuo (CI/CD)
+              </li>
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i>
+                Monitoramento 24/7
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background: linear-gradient(135deg, #10b981, #34d399)"
+            >
+              <i class="fas fa-database"></i>
+            </div>
+            <h4>Azure SQL Database</h4>
+            <p
+              style="
+                color: var(--text-secondary);
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+              "
+            >
+              Banco de dados relacional gerenciado
+            </p>
+            <ul style="list-style: none; padding: 0; font-size: 0.875rem">
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i> Backup
+                automático diário
+              </li>
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i>
+                Geo-replicação configurada
+              </li>
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i>
+                Point-in-time recovery
+              </li>
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i> Escala
+                vertical sob demanda
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background: linear-gradient(135deg, #f59e0b, #fbbf24)"
+            >
+              <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <h4>Azure Blob Storage</h4>
+            <p
+              style="
+                color: var(--text-secondary);
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+              "
+            >
+              Armazenamento de arquivos (fotos, raio-X, documentos)
+            </p>
+            <ul style="list-style: none; padding: 0; font-size: 0.875rem">
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i>
+                Armazenamento ilimitado escalável
+              </li>
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i> SAS Tokens
+                para segurança
+              </li>
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i> CDN para
+                acesso rápido
+              </li>
+              <li style="padding: 0.3rem 0">
+                <i class="fas fa-check" style="color: #10b981"></i> Retenção
+                conforme LGPD
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <h3
+          style="
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+          "
+        >
+          <i class="fas fa-chart-line"></i> Custos Mensais por Escala de
+          Operação
+        </h3>
+
+        <div
+          class="notice-box"
+          style="
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fefce8, #fef3c7);
+            border-left-color: #f59e0b;
+          "
+        >
+          <div
+            class="notice-icon"
+            style="background: linear-gradient(135deg, #f59e0b, #fbbf24)"
+          >
+            <i class="fas fa-calculator"></i>
+          </div>
+          <div class="notice-content">
+            <h4 style="color: #92400e">
+              <i class="fas fa-info-circle"></i> Metodologia de Precificação
+            </h4>
+            <p style="color: #78350f">
+              Os valores de infraestrutura são calculados com base em:
+            </p>
+            <ul style="color: #78350f">
+              <li>
+                <strong>Cotação oficial da Azure</strong> (preços públicos da
+                Microsoft)
+              </li>
+              <li>
+                <strong>Consumo estimado</strong> por número de clínicas e
+                volume de dados
+              </li>
+              <li>
+                <strong>Margem de segurança</strong> para picos de acesso
+                (20-30%)
+              </li>
+              <li>
+                <strong>Taxa administrativa</strong> de gerenciamento da
+                infraestrutura (10%)
+              </li>
+            </ul>
+            <p style="color: #78350f; margin-top: 1rem; font-size: 0.95rem">
+              <i class="fas fa-lightbulb"></i>
+              <strong>Importante:</strong> Valores podem variar conforme cotação
+              do dólar e promoções da Microsoft. Esta é uma estimativa baseada
+              nos preços atuais.
+            </p>
+          </div>
+        </div>
+
+        <div class="azure-grid" style="margin-bottom: 2rem">
+          <div class="pricing-card">
+            <span
+              class="pricing-badge"
+              style="background: #95ef4f; color: var(--primary-dark)"
+              >Piloto / MVP</span
+            >
+            <div class="pricing-title">1 Clínica</div>
+            <div class="pricing-price">R$ XXX</div>
+            <div class="pricing-period">por mês</div>
+            <h5
+              style="
+                font-size: 0.875rem;
+                font-weight: 600;
+                margin: 1rem 0 0.5rem;
+                color: var(--primary-dark);
+              "
+            >
+              Recursos Incluídos:
+            </h5>
+            <ul class="pricing-features">
+              <li>App Service Basic B2 (1 core, 3.5 GB RAM)</li>
+              <li>SQL Database Basic 2GB</li>
+              <li>Blob Storage ~50GB</li>
+              <li>Backup automático diário</li>
+              <li>SSL/HTTPS incluído</li>
+              <li>Até ~200 usuários simultâneos</li>
+            </ul>
+          </div>
+
+          <div class="pricing-card featured">
+            <span
+              class="pricing-badge"
+              style="background: #3b82f6; color: white"
+              >Recomendado</span
+            >
+            <div class="pricing-title">Até 8 Clínicas</div>
+            <div class="pricing-price">R$ XXX</div>
+            <div class="pricing-period">por mês</div>
+            <h5
+              style="
+                font-size: 0.875rem;
+                font-weight: 600;
+                margin: 1rem 0 0.5rem;
+                color: var(--primary-dark);
+              "
+            >
+              Recursos Incluídos:
+            </h5>
+            <ul class="pricing-features">
+              <li>App Service Standard S2 (2 cores, 7 GB RAM)</li>
+              <li>SQL Database S1 20GB</li>
+              <li>Blob Storage ~500GB</li>
+              <li>Azure CDN para performance</li>
+              <li>Disaster Recovery configurado</li>
+              <li>Até ~1.000 usuários simultâneos</li>
+            </ul>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-title">Até 16 Clínicas</div>
+            <div class="pricing-price">R$ XXX</div>
+            <div class="pricing-period">por mês</div>
+            <h5
+              style="
+                font-size: 0.875rem;
+                font-weight: 600;
+                margin: 1rem 0 0.5rem;
+                color: var(--primary-dark);
+              "
+            >
+              Recursos Incluídos:
+            </h5>
+            <ul class="pricing-features">
+              <li>App Service Standard S3 (4 cores, 14 GB RAM)</li>
+              <li>SQL Database S2 50GB</li>
+              <li>Blob Storage ~1.5TB</li>
+              <li>CDN + Load Balancer</li>
+              <li>Geo-redundância ativa</li>
+              <li>Até ~2.500 usuários simultâneos</li>
+            </ul>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-title">17+ Clínicas</div>
+            <div class="pricing-price">R$ XXX</div>
+            <div class="pricing-period">por mês</div>
+            <h5
+              style="
+                font-size: 0.875rem;
+                font-weight: 600;
+                margin: 1rem 0 0.5rem;
+                color: var(--primary-dark);
+              "
+            >
+              Recursos Incluídos:
+            </h5>
+            <ul class="pricing-features">
+              <li>App Service Premium P2 (8 cores, 28 GB RAM)</li>
+              <li>SQL Database S4 100GB+</li>
+              <li>Blob Storage ilimitado</li>
+              <li>CDN + Load Balancer + WAF</li>
+              <li>DR + Geo-redundância + SLA 99.95%</li>
+              <li>5.000+ usuários simultâneos</li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="card"
+          style="
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+          "
+        >
+          <h4 style="color: #065f46; margin-bottom: 1rem">
+            <i class="fas fa-rocket"></i> Escalabilidade Sem Friction
+          </h4>
+          <p style="color: #047857; font-size: 0.95rem; margin: 0">
+            O upgrade entre tiers
+            <strong>não exige migração de dados</strong> nem downtime. A
+            infraestrutura cresce organicamente conforme a operação — a cada 8
+            novas clínicas incorporadas, avança-se para o próximo nível de forma
+            planejada, sem interrupção.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rastreabilidade e Controle -->
+    <section class="section">
+      <div class="container">
+        <span class="label">Controle e Governança</span>
+        <h2 class="text-center">Rastreabilidade Total e Prevenção de Erros</h2>
+        <p class="subtitle text-center mb-5">
+          Saiba <strong>quem fez o quê, quando e por quê</strong>. Previna erros
+          antes que aconteçam.
+        </p>
+
+        <div class="grid grid-2">
+          <!-- Auditoria e Rastreabilidade -->
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background: linear-gradient(135deg, #8b5cf6, #a78bfa)"
+            >
+              <i class="fas fa-history"></i>
+            </div>
+            <h3>Auditoria Completa</h3>
+            <ul style="list-style: none; padding: 0; margin-top: 1rem">
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-check-circle"
+                  style="color: var(--secondary-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Quem abriu/fechou agendas</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Rastreie qual coordenador liberou horários, quando e para
+                    qual profissional
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-check-circle"
+                  style="color: var(--secondary-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Quem agendou/cancelou consultas</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Histórico completo de mudanças com usuário, data/hora e
+                    motivo
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-check-circle"
+                  style="color: var(--secondary-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Alterações em fichas clínicas</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Versionamento: veja o que mudou, quem alterou e quando
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-check-circle"
+                  style="color: var(--secondary-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Acessos a dados sensíveis</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Conformidade LGPD: registro de quem visualizou cada
+                    prontuário
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Alertas e Prevenção -->
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background: linear-gradient(135deg, #f59e0b, #fbbf24)"
+            >
+              <i class="fas fa-bell"></i>
+            </div>
+            <h3>Alertas Inteligentes</h3>
+            <ul style="list-style: none; padding: 0; margin-top: 1rem">
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-exclamation-triangle"
+                  style="color: var(--accent-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Vencimento de documentos</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Alerta automático: CRO vencido, contratos expirando,
+                    certificados
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-exclamation-triangle"
+                  style="color: var(--accent-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Agendas com problemas</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Sistema avisa: agenda sem consultas, horários vazios,
+                    overbooking
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-exclamation-triangle"
+                  style="color: var(--accent-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Folha de pagamento inconsistente</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Detecta erros antes de processar: horas fora do padrão,
+                    valores duplicados
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-exclamation-triangle"
+                  style="color: var(--accent-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Anomalias operacionais</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Taxa de faltas anormal, tempo de fila acima do normal, etc.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Prevenção de Erros -->
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background: linear-gradient(135deg, #ef4444, #f87171)"
+            >
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Prevenção Ativa de Erros</h3>
+            <ul style="list-style: none; padding: 0; margin-top: 1rem">
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-times-circle"
+                  style="color: var(--danger-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Validações em tempo real</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Sistema bloqueia: agendamento duplicado, CPF inválido, dados
+                    obrigatórios faltando
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-times-circle"
+                  style="color: var(--danger-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Confirmações críticas</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Pede confirmação antes de: cancelar consulta, deletar dados,
+                    processar pagamento
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-times-circle"
+                  style="color: var(--danger-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Cálculos automáticos</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Zero erro humano: folha, CNAB, relatórios calculados pelo
+                    sistema
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-times-circle"
+                  style="color: var(--danger-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Backup automático</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Impossível perder dados: backup diário automático no Azure
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Compliance e Segurança -->
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background: linear-gradient(135deg, #10b981, #34d399)"
+            >
+              <i class="fas fa-gavel"></i>
+            </div>
+            <h3>Compliance Legal</h3>
+            <ul style="list-style: none; padding: 0; margin-top: 1rem">
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-file-contract"
+                  style="color: var(--secondary-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>LGPD nativo</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Consentimento, anonimização, direito ao esquecimento,
+                    relatório de acessos
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-file-contract"
+                  style="color: var(--secondary-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Retenção de prontuários</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Mínimo 20 anos (CFO), armazenamento ilimitado no Azure
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-file-contract"
+                  style="color: var(--secondary-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Atestados com QR Code</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Preparado para lei futura de validação digital de atestados
+                    médicos
+                  </p>
+                </div>
+              </li>
+              <li
+                style="
+                  padding: 0.5rem 0;
+                  display: flex;
+                  align-items: start;
+                  gap: 0.75rem;
+                "
+              >
+                <i
+                  class="fas fa-file-contract"
+                  style="color: var(--secondary-color); margin-top: 0.25rem"
+                ></i>
+                <div>
+                  <strong>Logs imutáveis</strong>
+                  <p
+                    style="
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;
+                      margin: 0.25rem 0 0 0;
+                    "
+                  >
+                    Evidências para auditoria: ninguém pode alterar histórico de
+                    ações
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="card mt-5"
+          style="
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--primary-color);
+            text-align: center;
+            padding: 2rem;
+          "
+        >
+          <h3 style="color: var(--primary-dark); margin-bottom: 1rem">
+            <i class="fas fa-shield-alt"></i> Zero Tolerância a Erros = Operação
+            Confiável
+          </h3>
+          <p style="font-size: 1.125rem; color: var(--text-primary)">
+            Com rastreabilidade total e alertas preventivos, você
+            <strong>elimina 95% dos erros operacionais</strong>
+            e garante conformidade legal total.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cronograma -->
+    <section id="cronograma" class="section">
+      <div class="container">
+        <span class="label">Planejamento</span>
+        <h2 class="text-center">Cronograma de Implementação</h2>
+        <p class="subtitle text-center mb-5">
+          Desenvolvimento completo em <strong>31 meses (~2,5 anos)</strong> com entrega gradual de módulos.
+        </p>
+
+        <div class="card">
+          <h4><i class="fas fa-calendar-check"></i> Cronograma Detalhado - 24 Meses</h4>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fase</th>
+                  <th>Módulo</th>
+                  <th>Duração</th>
+                  <th>Horas Estimadas</th>
+                  <th>Período</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0</td>
+                  <td>Setup e Infraestrutura Azure</td>
+                  <td>2 meses</td>
+                  <td>320h</td>
+                  <td>Mês 1-2</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>Autenticação e Cadastros (9 sub-módulos)</td>
+                  <td>3 meses</td>
+                  <td>480h</td>
+                  <td>Mês 3-5</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Agendamento de Consultas (9 módulos base)</td>
+                  <td>4 meses</td>
+                  <td>640h</td>
+                  <td>Mês 6-9</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Gestão de Senhas e Fila</td>
+                  <td>2 meses</td>
+                  <td>320h</td>
+                  <td>Mês 10-11</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Ficha Clínica Digital (12 componentes + Azure)</td>
+                  <td>5 meses</td>
+                  <td>800h</td>
+                  <td>Mês 12-16</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Relatórios e Métricas (Sintéticos + Analíticos)</td>
+                  <td>3 meses</td>
+                  <td>480h</td>
+                  <td>Mês 17-19</td>
+                </tr>
+                 <tr>
+                   <td>6</td>
+                   <td>Comunicação e Follow-up (6 features)</td>
+                   <td>2 meses</td>
+                   <td>320h</td>
+                   <td>Mês 20-21</td>
+                 </tr>
+                 <tr>
+                   <td>7</td>
+                   <td>RH &amp; Departamento Pessoal (Core)</td>
+                   <td>2 meses</td>
+                   <td>320h</td>
+                   <td>Mês 22-23</td>
+                 </tr>
+                 <tr>
+                   <td>8</td>
+                   <td>Gestão de Estoque (NF + Logística + Ativos)</td>
+                   <td>3 meses</td>
+                   <td>480h</td>
+                   <td>Mês 24-26</td>
+                 </tr>
+                 <tr>
+                   <td>9</td>
+                   <td>Assistência Técnica (Chamados + GPS)</td>
+                   <td>2 meses</td>
+                   <td>320h</td>
+                   <td>Mês 27-28</td>
+                 </tr>
+                 <tr class="table-highlight">
+                   <td colspan="2"><strong>TOTAL PROJETO</strong></td>
+                   <td><strong>31 meses</strong></td>
+                   <td><strong>4.960h</strong></td>
+                   <td><strong>~2,5 anos</strong></td>
+                 </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-4">
+            <h4><i class="fas fa-info-circle"></i> Observações Importantes</h4>
+            <ul class="features-list">
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <strong>Entregas Incrementais:</strong> Cada módulo é entregue e testado antes de iniciar o próximo
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <strong>Equipe:</strong> 1 desenvolvedor dedicado full-time (160h/mês)
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <strong>MVP Funcional:</strong> Primeiros 4 módulos funcionais em ~11 meses
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <strong>Testes e QA:</strong> Incluídos nas estimativas de cada módulo
+              </li>
+              <li>
+                <i class="fas fa-check-circle"></i>
+                <strong>Buffer:</strong> 15-20% de margem já considerada nas estimativas
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Investimento -->
+    <section id="investimento" class="section section-alt">
+      <div class="container">
+        <!-- <span class="label">Financeiro</span> -->
+        <h2 class="text-center">Precificação Detalhada</h2>
+        <p class="subtitle text-center mb-5">
+          Transparência total — cada módulo precificado individualmente,
+          infraestrutura Azure escalável conforme o crescimento.
+        </p>
+
+        <!-- Desenvolvimento por módulo -->
+        <div class="pricing-section-block">
+          <div class="pricing-detail-header">
+            <div class="pricing-detail-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <div>
+              <h3>Desenvolvimento — Módulo a Módulo</h3>
+              <p>
+                Pagamento conforme entrega de cada módulo ao longo do cronograma
+                de 31 meses (R$ 6.500/mês - 1 desenvolvedor dedicado full-time)
+              </p>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 4%">#</th>
+                  <th style="width: 26%">Módulo</th>
+                  <th style="width: 44%">Escopo Principal</th>
+                  <th style="width: 13%; text-align: center">Complexidade</th>
+                  <th style="width: 13%; text-align: right">Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>0</strong></td>
+                  <td>
+                    <i
+                      class="fas fa-cogs"
+                      style="color: var(--primary-color); margin-right: 0.5rem"
+                    ></i
+                    >Setup e Infraestrutura
+                  </td>
+                  <td>
+                    Configuração Azure Cloud, banco de dados, CI/CD, 
+                    ambientes dev/staging/prod, segurança SSL
+                  </td>
+                  <td style="text-align: center">
+                    <span class="badge badge-info">Média</span>
+                  </td>
+                  <td class="price-value">R$ 13.000</td>
+                </tr>
+                <tr>
+                  <td><strong>1</strong></td>
+                  <td>
+                    <i
+                      class="fas fa-shield-alt"
+                      style="color: var(--primary-color); margin-right: 0.5rem"
+                    ></i
+                    >Autenticação e Cadastros
+                  </td>
+                  <td>
+                    SSO, perfis de acesso granulares, cadastro centralizado,
+                    multi-tenant, auditoria LGPD
+                  </td>
+                  <td style="text-align: center">
+                    <span class="badge badge-info">Média</span>
+                  </td>
+                  <td class="price-value">R$ 19.500</td>
+                </tr>
+                <tr>
+                  <td><strong>2</strong></td>
+                  <td>
+                    <i
+                      class="fas fa-calendar-alt"
+                      style="color: var(--primary-color); margin-right: 0.5rem"
+                    ></i
+                    >Agendamento de Consultas
+                  </td>
+                  <td>
+                    Calendário visual, lembretes automáticos (6 meses), fila de
+                    espera digital, relatórios
+                  </td>
+                  <td style="text-align: center">
+                    <span class="badge badge-info">Média</span>
+                  </td>
+                  <td class="price-value">R$ 26.000</td>
+                </tr>
+                <tr>
+                  <td><strong>3</strong></td>
+                  <td>
+                    <i
+                      class="fas fa-ticket-alt"
+                      style="color: var(--primary-color); margin-right: 0.5rem"
+                    ></i
+                    >Fila Digital / Senhas
+                  </td>
+                  <td>
+                    Totem de senhas, painel de TV, chamada via SignalR, métricas
+                    de espera estimadas
+                  </td>
+                  <td style="text-align: center">
+                    <span class="badge badge-high">Alta</span>
+                  </td>
+                  <td class="price-value">R$ 13.000</td>
+                </tr>
+                <tr>
+                  <td><strong>4</strong></td>
+                  <td>
+                    <i
+                      class="fas fa-file-medical"
+                      style="color: var(--primary-color); margin-right: 0.5rem"
+                    ></i
+                    >Ficha Clínica + Azure
+                  </td>
+                  <td>
+                    Prontuário, odontograma digital, fotos/raio-X Azure Blob,
+                    receita digital ICP-Brasil*, atestados QR Code
+                  </td>
+                  <td style="text-align: center">
+                    <span class="badge badge-high">Alta</span>
+                  </td>
+                  <td class="price-value">R$ 32.500</td>
+                </tr>
+                <tr>
+                  <td><strong>5</strong></td>
+                  <td>
+                    <i
+                      class="fas fa-chart-pie"
+                      style="color: var(--primary-color); margin-right: 0.5rem"
+                    ></i
+                    >Relatórios e Métricas
+                  </td>
+                  <td>
+                    Dashboard tempo real, filtros avançados, exportação
+                    Excel/PDF, tempo de atendimento estimado
+                  </td>
+                  <td style="text-align: center">
+                    <span class="badge badge-info">Média</span>
+                  </td>
+                  <td class="price-value">R$ 19.500</td>
+                </tr>
+                <tr>
+                  <td><strong>6</strong></td>
+                  <td>
+                    <i
+                      class="fas fa-dollar-sign"
+                      style="color: var(--primary-color); margin-right: 0.5rem"
+                    ></i
+                    >Financeiro e Faturamento
+                  </td>
+                  <td>
+                    Folha automática, CNAB bancário em 1 clique, contas a
+                    pagar/receber, Gross Profit
+                  </td>
+                  <td style="text-align: center">
+                    <span class="badge badge-high">Alta</span>
+                  </td>
+                  <td class="price-value">R$ 19.500</td>
+                </tr>
+                <tr>
+                  <td><strong>6</strong></td>
+                   <td>
+                     <i
+                       class="fas fa-comments"
+                       style="color: var(--primary-color); margin-right: 0.5rem"
+                     ></i
+                     >Comunicação e Follow-up
+                   </td>
+                   <td>
+                     Chamados digitais, follow-up automatizado, avaliações,
+                     gestão remota multi-clínica
+                   </td>
+                   <td style="text-align: center">
+                     <span class="badge badge-success">Baixa</span>
+                   </td>
+                   <td class="price-value">R$ 13.000</td>
+                 </tr>
+                 <tr>
+                   <td><strong>7</strong></td>
+                   <td>
+                     <i
+                       class="fas fa-users"
+                       style="color: var(--primary-color); margin-right: 0.5rem"
+                     ></i
+                     >RH &amp; Departamento Pessoal
+                   </td>
+                   <td>
+                     Cadastro de colaboradores, dados bancários, folha de pagamento, benefícios (VA, convênio, VT, adiantamento), lançamentos automáticos ao financeiro, relatórios de custo com capital humano
+                   </td>
+                   <td style="text-align: center">
+                     <span class="badge badge-high">Alta</span>
+                   </td>
+                   <td class="price-value">R$ 13.000</td>
+                 </tr>
+                 <tr>
+                   <td><strong>8</strong></td>
+                   <td>
+                     <i
+                       class="fas fa-boxes"
+                       style="color: var(--primary-color); margin-right: 0.5rem"
+                     ></i
+                     >Gestão de Estoque
+                   </td>
+                   <td>
+                     Importação de nota fiscal (atualização automática de valores com histórico), fluxo de pedido por clínica com aprovação, logística com foto de conferência, categorias e subcategorias, controle de ativos por unidade, relatórios exportáveis em Excel, rastreamento de entrega com GPS
+                   </td>
+                   <td style="text-align: center">
+                     <span class="badge badge-high">Alta</span>
+                   </td>
+                   <td class="price-value">R$ 19.500</td>
+                 </tr>
+                 <tr>
+                   <td><strong>9</strong></td>
+                   <td>
+                     <i
+                       class="fas fa-tools"
+                       style="color: var(--primary-color); margin-right: 0.5rem"
+                     ></i
+                     >Assistência Técnica
+                   </td>
+                   <td>
+                     Chamados técnicos, manutenção preventiva e reparativa, métricas de equipamentos (frequência de falhas → indicador de substituição), rastreamento GPS de técnicos com histórico de atividades, custo por chamado
+                   </td>
+                   <td style="text-align: center">
+                     <span class="badge badge-high">Alta</span>
+                   </td>
+                   <td class="price-value">R$ 13.000</td>
+                 </tr>
+                 <tr class="table-highlight">
+                   <td colspan="4" style="text-align: right; font-size: 1rem">
+                     <strong>TOTAL DE DESENVOLVIMENTO</strong>
+                   </td>
+                   <td class="price-total">R$ 169.000</td>
+                 </tr>
+              </tbody>
+            </table>
+          </div>
+          <p
+            style="
+              font-size: 0.8rem;
+              color: var(--text-secondary);
+              margin-top: 0.75rem;
+              text-align: right;
+            "
+          >
+            <i class="fas fa-info-circle"></i>&nbsp; Pagamento sugerido: entrada
+            + parcelas por módulo entregue conforme cronograma. &nbsp;|&nbsp; *
+            Certificado ICP-Brasil por conta de cada profissional.
+          </p>
+        </div>
+
+        <!-- Custo Diluído por Clínicas -->
+        <div class="pricing-section-block">
+          <div class="pricing-detail-header">
+            <div class="pricing-detail-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <div>
+              <h3>Custo de Desenvolvimento Diluído por Clínicas</h3>
+              <p>
+                Quanto mais clínicas utilizarem o sistema, menor o investimento por unidade.
+                Veja o custo mensal por clínica durante os 31 meses de desenvolvimento.
+              </p>
+            </div>
+          </div>
+
+          <div class="azure-grid">
+            <div class="pricing-card">
+              <div class="pricing-title">1 Clínica</div>
+              <div class="pricing-price">R$ 6.500</div>
+              <div class="pricing-period">por mês / por clínica</div>
+               <ul class="pricing-features">
+                 <li><strong>Durante 31 meses</strong></li>
+                 <li>Total: R$ 169.000</li>
+                 <li>Sistema completo</li>
+                 <li>10 módulos integrados</li>
+                 <li>Código-fonte incluído</li>
+               </ul>
+            </div>
+
+            <div class="pricing-card featured">
+              <span
+                class="pricing-badge"
+                style="background: #95ef4f; color: var(--primary-dark)"
+                >Melhor Custo-Benefício</span
+              >
+              <div class="pricing-title">8 Clínicas</div>
+              <div class="pricing-price">R$ 812,50</div>
+              <div class="pricing-period">por mês / por clínica</div>
+               <ul class="pricing-features">
+                 <li><strong>Durante 31 meses</strong></li>
+                 <li>R$ 6.500/mês total</li>
+                 <li>Sistema unificado</li>
+                 <li>Multi-tenant nativo</li>
+                 <li>Gestão centralizada</li>
+               </ul>
+             </div>
+
+             <div class="pricing-card">
+               <div class="pricing-title">16 Clínicas</div>
+               <div class="pricing-price">R$ 406</div>
+               <div class="pricing-period">por mês / por clínica</div>
+               <ul class="pricing-features">
+                 <li><strong>Durante 31 meses</strong></li>
+                 <li>R$ 6.500/mês total</li>
+                 <li>ROI altamente atrativo</li>
+                 <li>Escala enterprise</li>
+                 <li>Controle unificado</li>
+               </ul>
+             </div>
+
+             <div class="pricing-card">
+               <div class="pricing-title">20+ Clínicas</div>
+               <div class="pricing-price">R$ 325</div>
+               <div class="pricing-period">por mês / por clínica (20 clínicas)</div>
+               <ul class="pricing-features">
+                 <li><strong>Durante 31 meses</strong></li>
+                 <li>R$ 6.500/mês total fixo</li>
+                 <li>Máxima diluição</li>
+                 <li>30 clínicas = R$ 217/mês cada</li>
+                 <li>ROI excepcional</li>
+               </ul>
+            </div>
+          </div>
+
+          <div
+            class="card mt-3"
+            style="
+              background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+              border-left: 4px solid #95ef4f;
+              padding: var(--spacing-md);
+            "
+          >
+            <p
+              style="margin: 0; font-size: 0.875rem; color: var(--text-primary)"
+            >
+              <i
+                class="fas fa-lightbulb"
+                style="color: #95ef4f; margin-right: 0.5rem"
+              ></i>
+              <strong>Exemplo Real:</strong> Se você tem 20 clínicas operando no sistema, 
+              o investimento de desenvolvimento fica em apenas <strong>R$ 325 por mês por clínica</strong> 
+              durante os 31 meses. Após esse período, o sistema é 100% seu, sem mensalidades de desenvolvimento.
+            </p>
+          </div>
+        </div>
+
+        <!-- Infraestrutura Necessária (Descritivo) -->
+        <div class="pricing-section-block">
+          <div class="pricing-detail-header">
+            <div class="pricing-detail-icon">
+              <i class="fab fa-microsoft"></i>
+            </div>
+            <div>
+              <h3>Infraestrutura Azure Necessária</h3>
+              <p>
+                Infraestrutura cloud escalável conforme o crescimento da operação.
+                <strong>Custo operacional pago diretamente à Microsoft Azure.</strong>
+              </p>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Escala</th>
+                  <th>Componentes Necessários</th>
+                  <th>Características</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1 Clínica (MVP)</strong></td>
+                  <td>
+                    • App Service Basic B2<br>
+                    • SQL Database Basic 2GB<br>
+                    • Blob Storage ~50GB
+                  </td>
+                  <td>
+                    Backup automático diário, SSL/HTTPS incluído
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Até 8 Clínicas</strong></td>
+                  <td>
+                    • App Service Standard S2<br>
+                    • SQL Database S1 20GB<br>
+                    • Blob Storage ~500GB<br>
+                    • Azure CDN
+                  </td>
+                  <td>
+                    Disaster Recovery, performance otimizada
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Até 16 Clínicas</strong></td>
+                  <td>
+                    • App Service Standard S3<br>
+                    • SQL Database S2 50GB<br>
+                    • Blob Storage ~1.5TB<br>
+                    • CDN + Load Balancer
+                  </td>
+                  <td>
+                    Geo-redundância, alta disponibilidade
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>17+ Clínicas</strong></td>
+                  <td>
+                    • App Service Premium P2<br>
+                    • SQL Database S4 100GB+<br>
+                    • Blob Storage ilimitado<br>
+                    • CDN + Load Balancer + WAF
+                  </td>
+                  <td>
+                    SLA 99.9%, máxima segurança e performance
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            class="card mt-3"
+            style="
+              background: linear-gradient(135deg, #eff6ff, #dbeafe);
+              border-left: 4px solid #3b82f6;
+              padding: var(--spacing-md);
+            "
+          >
+            <p
+              style="margin: 0; font-size: 0.875rem; color: var(--text-primary)"
+            >
+              <i
+                class="fas fa-info-circle"
+                style="color: #3b82f6; margin-right: 0.5rem"
+              ></i>
+              <strong>Infraestrutura Escalável:</strong> A infraestrutura Azure é dimensionada 
+              conforme o crescimento. O upgrade não exige migração de dados nem downtime. 
+              Valores variam conforme consumo real e são pagos diretamente à Microsoft.
+            </p>
+          </div>
+        </div>
+
+        <!-- Resumo Investimento -->
+        <div class="card mt-4" style="background: linear-gradient(135deg, #fef3c7, #fde68a); border-left: 4px solid var(--accent-color); padding: var(--spacing-lg);">
+          <h3 style="color: var(--primary-dark); margin-bottom: 1.5rem;">
+            <i class="fas fa-coins"></i> Resumo do Investimento de Desenvolvimento
+          </h3>
+          
+          <div style="background: white; padding: var(--spacing-lg); border-radius: 12px; box-shadow: var(--shadow-lg); margin-bottom: var(--spacing-lg);">
+            <div style="text-align: center; margin-bottom: var(--spacing-md);">
+              <div style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                Investimento Total em Desenvolvimento
+              </div>
+              <div style="font-size: 3rem; font-weight: 800; color: var(--primary-dark); line-height: 1;">
+                 R$ 169.000
+              </div>
+              <div style="font-size: 1.125rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                 em 31 meses
+              </div>
+            </div>
+            
+            <div style="border-top: 2px solid var(--border-color); padding-top: var(--spacing-md); text-align: center;">
+              <div style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                Pagamento Mensal Fixo
+              </div>
+              <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent-color); line-height: 1;">
+                R$ 6.500<span style="font-size: 1.25rem; font-weight: 500;">/mês</span>
+              </div>
+              <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                1 desenvolvedor dedicado full-time
+              </div>
+            </div>
+
+            <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-radius: 8px;">
+              <div style="font-size: 1.125rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.75rem; text-align: center;">
+                <i class="fas fa-calculator" style="color: #95ef4f;"></i> Custo por Clínica
+              </div>
+              <div class="grid grid-2" style="gap: 1rem;">
+                <div style="text-align: center; padding: 0.75rem;">
+                  <div style="font-size: 0.85rem; color: var(--text-secondary);">8 Clínicas</div>
+                  <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-dark);">R$ 812,50</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">por mês/clínica</div>
+                </div>
+                <div style="text-align: center; padding: 0.75rem;">
+                  <div style="font-size: 0.85rem; color: var(--text-secondary);">16 Clínicas</div>
+                  <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary-dark);">R$ 406</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">por mês/clínica</div>
+                </div>
+                <div style="text-align: center; padding: 0.75rem;">
+                  <div style="font-size: 0.85rem; color: var(--text-secondary);">20 Clínicas</div>
+                  <div style="font-size: 1.5rem; font-weight: 700; color: #95ef4f;">R$ 325</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">por mês/clínica</div>
+                </div>
+                <div style="text-align: center; padding: 0.75rem;">
+                  <div style="font-size: 0.85rem; color: var(--text-secondary);">30 Clínicas</div>
+                  <div style="font-size: 1.5rem; font-weight: 700; color: #95ef4f;">R$ 217</div>
+                  <div style="font-size: 0.75rem; color: var(--text-secondary);">por mês/clínica</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: white; padding: var(--spacing-md); border-radius: 8px; border: 2px dashed var(--accent-color);">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+              <li style="padding: 0.5rem 0; display: flex; align-items: center;">
+                <i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 0.75rem; font-size: 1.125rem;"></i>
+                 <span><strong>Pagamento Mensal Fixo:</strong> R$ 6.500/mês durante 31 meses (1 desenvolvedor dedicado)</span>
+              </li>
+              <li style="padding: 0.5rem 0; display: flex; align-items: center;">
+                <i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 0.75rem; font-size: 1.125rem;"></i>
+                <span><strong>Entregas Incrementais:</strong> Cada módulo entregue e testado antes de prosseguir</span>
+              </li>
+              <li style="padding: 0.5rem 0; display: flex; align-items: center;">
+                <i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 0.75rem; font-size: 1.125rem;"></i>
+                <span><strong>Infraestrutura Separada:</strong> Custo operacional Azure pago diretamente à Microsoft (valores conforme escala real)</span>
+              </li>
+              <li style="padding: 0.5rem 0; display: flex; align-items: center;">
+                <i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 0.75rem; font-size: 1.125rem;"></i>
+                <span><strong>Código-Fonte:</strong> Propriedade total do cliente após conclusão do projeto</span>
+              </li>
+              <li style="padding: 0.5rem 0; display: flex; align-items: center;">
+                <i class="fas fa-check-circle" style="color: var(--secondary-color); margin-right: 0.75rem; font-size: 1.125rem;"></i>
+                <span><strong>Economia de Escala:</strong> Quanto mais clínicas, menor o custo por unidade</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ROI -->
+        <div
+          class="card"
+          style="
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--primary-color);
+            text-align: center;
+            padding: 2rem;
+          "
+        >
+          <h3 style="color: var(--primary-dark); margin-bottom: 1rem">
+            <i class="fas fa-calculator"></i> Calcule Seu ROI Real
+          </h3>
+          <p
+            style="
+              font-size: 1.125rem;
+              color: var(--text-primary);
+              margin-bottom: 1rem;
+            "
+          >
+            O retorno varia conforme o volume de operação.
+            <strong>Vamos calcular juntos</strong> baseado nos seus números.
+          </p>
+          <p style="font-size: 0.95rem; color: var(--text-secondary)">
+            <strong>Principais ganhos:</strong> Redução de horas
+            administrativas, eliminação de erros em folha de pagamento,
+            otimização de agendas (menos horários vazios), economia com papel e
+            armazenamento físico.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="section">
+      <div class="container">
+        <span class="label">Tecnologia</span>
+        <h2 class="text-center">Stack Tecnológica Microsoft</h2>
+        <p class="subtitle text-center mb-5">
+          Tecnologias modernas, robustas e escaláveis.
+        </p>
+
+        <div class="tech-stack">
+          <div class="tech-item">
+            <div class="tech-icon">
+              <i class="fab fa-microsoft"></i>
+            </div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem">
+              .NET Core 8
+            </div>
+            <div style="font-size: 0.875rem; color: var(--text-secondary)">
+              Backend robusto
+            </div>
+          </div>
+
+          <div class="tech-item">
+            <div class="tech-icon">
+              <i class="fab fa-react"></i>
+            </div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem">
+              React + TypeScript
+            </div>
+            <div style="font-size: 0.875rem; color: var(--text-secondary)">
+              Interface moderna
+            </div>
+          </div>
+
+          <div class="tech-item">
+            <div class="tech-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem">
+              SQL Server
+            </div>
+            <div style="font-size: 0.875rem; color: var(--text-secondary)">
+              Banco confiável
+            </div>
+          </div>
+
+          <div class="tech-item">
+            <div class="tech-icon">
+              <i class="fab fa-microsoft"></i>
+            </div>
+            <div style="font-weight: 600; margin-bottom: 0.5rem">
+              Azure Cloud
+            </div>
+            <div style="font-size: 0.875rem; color: var(--text-secondary)">
+              Infraestrutura escalável
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container text-center">
+        <h2>Pronto para Transformar sua Gestão?</h2>
+        <p
+          style="
+            font-size: 1.125rem;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+          "
+        >
+          Entre em contato e agende uma reunião para discutir os próximos
+          passos.
+        </p>
+        <a href="#" class="btn">
+          <i class="fas fa-calendar-alt"></i> Agendar Reunião
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div>
+            <h5>Sobre a Empresa</h5>
+            <p>
+              INNOVASFERA — Desenvolvimento de soluções tecnológicas para a área
+              da saúde.
+            </p>
+          </div>
+
+          <div>
+            <h5>Contato</h5>
+            <ul>
+              <li>
+                <i class="fas fa-envelope"></i> contato@innovasfera.com.br
+              </li>
+              <li><i class="fas fa-phone"></i> (11) 94261-6650</li>
+              <li><i class="fas fa-map-marker-alt"></i> São Paulo, SP</li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>Tecnologias</h5>
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                font-size: 2rem;
+                margin-top: 1rem;
+              "
+            >
+              <i class="fab fa-microsoft" title=".NET Core"></i>
+              <i class="fab fa-react" title="React"></i>
+              <i class="fas fa-database" title="SQL Server"></i>
+              <i class="fab fa-microsoft" title="Azure"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 INNOVASFERA. Proposta Albus Dente | Abril 2026</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Progress bar
+      window.addEventListener("scroll", () => {
+        const winScroll =
+          document.body.scrollTop || document.documentElement.scrollTop;
+        const height =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("progressBar").style.width = scrolled + "%";
+      });
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // Toggle accordion module
+      function toggleModule(element) {
+        const isActive = element.classList.contains("active");
+
+        // Toggle clicked module (permite múltiplos abertos)
+        if (isActive) {
+          element.classList.remove("active");
+        } else {
+          element.classList.add("active");
+
+          // Scroll to module after animation
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }, 100);
+        }
+      }
+
+      // Auto-close accordion hint after first click
+      let firstClick = true;
+      document.querySelectorAll(".accordion-module").forEach((module) => {
+        module.addEventListener("click", () => {
+          if (firstClick) {
+            const hint = document.querySelector(".accordion-hint");
+            if (hint) {
+              hint.style.opacity = "0";
+              setTimeout(() => (hint.style.display = "none"), 300);
+            }
+            firstClick = false;
+          }
+        });
+      });
+    </script>
+
+    <!-- Logout Function -->
+    <script>
+      function logout() {
+        if (confirm('Deseja realmente sair do sistema?')) {
+          sessionStorage.removeItem('albusdente_authenticated');
+          sessionStorage.removeItem('albusdente_user');
+          sessionStorage.removeItem('albusdente_login_time');
+          window.location.href = '/';
+        }
+      }
+
+      // Auto logout após 8 horas de inatividade
+      let inactivityTimer;
+      function resetInactivityTimer() {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(() => {
+          alert('Sessão expirada por inatividade. Faça login novamente.');
+          logout();
+        }, 8 * 60 * 60 * 1000); // 8 horas
+      }
+
+      // Reset timer em qualquer interação
+      ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+        document.addEventListener(event, resetInactivityTimer, true);
+      });
+
+      // Iniciar timer
+      resetInactivityTimer();
+    </script>
+  </body>
+</html>

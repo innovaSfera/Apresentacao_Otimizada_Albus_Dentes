@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitetura do Sistema - Albus Dente</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #030012;
+            --primary-dark: #000000;
+            --primary-light: #1a1a2e;
+            --secondary-color: #10b981;
+            --accent-color: #f59e0b;
+            --danger-color: #ef4444;
+            --purple: #8b5cf6;
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+            --bg-color: #0a0a0f;
+            --bg-secondary: #141420;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --border-color: #1e293b;
+            --font-family: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .page-title h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #fff, var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Architecture Diagram */
+        .architecture-container {
+            position: relative;
+            min-height: 900px;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--border-color);
+            overflow: visible;
+        }
+
+        /* SVG Canvas for connections */
+        .connections-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Module Box */
+        .module-box {
+            position: absolute;
+            background: linear-gradient(135deg, var(--bg-color), var(--bg-secondary));
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            min-width: 200px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            animation: fadeInScale 0.6s ease-out forwards;
+        }
+
+        .module-box:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--secondary-color);
+            box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+        }
+
+        .module-box.active {
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 40px rgba(245, 158, 11, 0.4);
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Delay animations */
+        .module-box:nth-child(1) { animation-delay: 0.1s; }
+        .module-box:nth-child(2) { animation-delay: 0.2s; }
+        .module-box:nth-child(3) { animation-delay: 0.3s; }
+        .module-box:nth-child(4) { animation-delay: 0.4s; }
+        .module-box:nth-child(5) { animation-delay: 0.5s; }
+        .module-box:nth-child(6) { animation-delay: 0.6s; }
+        .module-box:nth-child(7) { animation-delay: 0.7s; }
+        .module-box:nth-child(8) { animation-delay: 0.8s; }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .module-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .module-title {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .module-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .module-badge {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            border-radius: 20px;
+            font-size: 0.625rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            font-family: var(--font-mono);
+        }
+
+        /* Module Colors */
+        .module-auth {
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+        .module-auth:hover { border-color: var(--purple); }
+        .module-auth .module-icon { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .module-auth .module-badge { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; }
+
+        .module-scheduling {
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+        .module-scheduling:hover { border-color: var(--cyan); }
+        .module-scheduling .module-icon { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+        .module-scheduling .module-badge { background: rgba(6, 182, 212, 0.2); color: #67e8f9; }
+
+        .module-queue {
+            border-color: rgba(245, 158, 11, 0.5);
+        }
+        .module-queue:hover { border-color: var(--accent-color); }
+        .module-queue .module-icon { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .module-queue .module-badge { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+
+        .module-clinical {
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+        .module-clinical:hover { border-color: var(--secondary-color); }
+        .module-clinical .module-icon { background: linear-gradient(135deg, #10b981, #34d399); }
+        .module-clinical .module-badge { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+
+        .module-reports {
+            border-color: rgba(236, 72, 153, 0.5);
+        }
+        .module-reports:hover { border-color: var(--pink); }
+        .module-reports .module-icon { background: linear-gradient(135deg, #ec4899, #f472b6); }
+        .module-reports .module-badge { background: rgba(236, 72, 153, 0.2); color: #f9a8d4; }
+
+        .module-financial {
+            border-color: rgba(239, 68, 68, 0.5);
+        }
+        .module-financial:hover { border-color: var(--danger-color); }
+        .module-financial .module-icon { background: linear-gradient(135deg, #ef4444, #f87171); }
+        .module-financial .module-badge { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+
+        .module-communication {
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+        .module-communication:hover { border-color: #6366f1; }
+        .module-communication .module-icon { background: linear-gradient(135deg, #6366f1, #818cf8); }
+        .module-communication .module-badge { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
+
+        .module-azure {
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .module-azure:hover { border-color: #3b82f6; }
+        .module-azure .module-icon { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .module-azure .module-badge { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+
+        /* Connection lines */
+        .connection-line {
+            stroke-width: 2;
+            stroke-dasharray: 5, 5;
+            stroke-linecap: round;
+            opacity: 0;
+            animation: drawLine 1s ease-out forwards;
+        }
+
+        @keyframes drawLine {
+            from {
+                stroke-dashoffset: 1000;
+                opacity: 0;
+            }
+            to {
+                stroke-dashoffset: 0;
+                opacity: 0.6;
+            }
+        }
+
+        .connection-line:hover {
+            opacity: 1;
+            stroke-width: 3;
+        }
+
+        /* Legend */
+        .legend {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .legend-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .legend-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .legend-text h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .legend-text p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .architecture-container {
+                padding: 1.5rem;
+                min-height: 1200px;
+            }
+            
+            .module-box {
+                min-width: 160px;
+                padding: 1rem;
+            }
+        }
+
+        /* Pulse animation for active connections */
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .connection-line.active {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>
+                <div class="header-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                Arquitetura do Sistema Albus Dente
+            </h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="apresentacao-albusdente.html"><i class="fas fa-arrow-left"></i> Voltar à Proposta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-title">
+            <h2>Diagrama de Arquitetura dos Módulos</h2>
+        </div>
+        <p class="page-subtitle">
+            <i class="fas fa-info-circle"></i> Visualização interativa de como os módulos se conectam e integram
+        </p>
+
+        <!-- Architecture Diagram -->
+        <div class="architecture-container">
+            <!-- SVG for connections -->
+            <svg class="connections-svg" id="connectionsSvg">
+                <!-- Connections will be drawn here by JavaScript -->
+            </svg>
+
+            <!-- Module 1: Autenticação (Centro - Base) -->
+            <div class="module-box module-auth" style="top: 50px; left: 50%; transform: translateX(-50%);" data-id="auth">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <div class="module-title">Autenticação & Cadastros</div>
+                        <div class="module-subtitle">Base do Sistema</div>
+                    </div>
+                </div>
+                <div class="module-badge">Core</div>
+            </div>
+
+            <!-- Module 2: Agendamento (Esquerda Superior) -->
+            <div class="module-box module-scheduling" style="top: 200px; left: 5%;" data-id="scheduling">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <div class="module-title">Agendamento</div>
+                        <div class="module-subtitle">Gestão de Consultas</div>
+                    </div>
+                </div>
+                <div class="module-badge">Frontend</div>
+            </div>
+
+            <!-- Module 3: Senhas e Fila (Centro Esquerda) -->
+            <div class="module-box module-queue" style="top: 380px; left: 8%;" data-id="queue">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div>
+                        <div class="module-title">Senhas & Fila</div>
+                        <div class="module-subtitle">Gestão de Atendimento</div>
+                    </div>
+                </div>
+                <div class="module-badge">Real-time</div>
+            </div>
+
+            <!-- Module 4: Ficha Clínica (Centro) -->
+            <div class="module-box module-clinical" style="top: 380px; left: 50%; transform: translateX(-50%);" data-id="clinical">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <div>
+                        <div class="module-title">Ficha Clínica</div>
+                        <div class="module-subtitle">Prontuário Digital</div>
+                    </div>
+                </div>
+                <div class="module-badge">Core + Azure</div>
+            </div>
+
+            <!-- Module 5: Relatórios (Direita Superior) -->
+            <div class="module-box module-reports" style="top: 200px; right: 5%;" data-id="reports">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div>
+                        <div class="module-title">Relatórios</div>
+                        <div class="module-subtitle">BI & Analytics</div>
+                    </div>
+                </div>
+                <div class="module-badge">Analytics</div>
+            </div>
+
+            <!-- Module 6: Financeiro (Centro Direita) - OCULTO
+            <div class="module-box module-financial" style="top: 380px; right: 8%;" data-id="financial">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div>
+                        <div class="module-title">Financeiro</div>
+                        <div class="module-subtitle">Faturamento & Pagamentos</div>
+                    </div>
+                </div>
+                <div class="module-badge">Backend</div>
+            </div>
+            -->
+
+            <!-- Module 7: Comunicação (Inferior Esquerda) -->
+            <div class="module-box module-communication" style="top: 560px; left: 15%;" data-id="communication">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div>
+                        <div class="module-title">Comunicação</div>
+                        <div class="module-subtitle">Follow-up & Notificações</div>
+                    </div>
+                </div>
+                <div class="module-badge">Integration</div>
+            </div>
+
+            <!-- Module 8: Azure (Inferior Direita) -->
+            <div class="module-box module-azure" style="top: 560px; right: 15%;" data-id="azure">
+                <div class="module-header">
+                    <div class="module-icon">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <div>
+                        <div class="module-title">Azure Cloud</div>
+                        <div class="module-subtitle">Armazenamento & Infraestrutura</div>
+                    </div>
+                </div>
+                <div class="module-badge">Cloud</div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-title">
+                <i class="fas fa-list"></i>
+                Legenda de Conexões
+            </div>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="legend-text">
+                        <h4>Autenticação → Todos</h4>
+                        <p>Base do sistema - valida acesso e permissões para todos os módulos</p>
+                    </div>
+                </div>
+
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="legend-text">
+                        <h4>Agendamento ↔ Fila</h4>
+                        <p>Consultas agendadas alimentam a fila de atendimento em tempo real</p>
+                    </div>
+                </div>
+
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: linear-gradient(135deg, #10b981, #34d399);">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <div class="legend-text">
+                        <h4>Ficha Clínica ↔ Azure</h4>
+                        <p>Imagens, raio-X e documentos armazenados na nuvem Microsoft</p>
+                    </div>
+                </div>
+
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: linear-gradient(135deg, #ec4899, #f472b6);">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="legend-text">
+                        <h4>Relatórios → Todos</h4>
+                        <p>Consolida dados de todos os módulos para análises e métricas</p>
+                    </div>
+                </div>
+
+                <!-- LEGENDA FINANCEIRO OCULTA
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: linear-gradient(135deg, #ef4444, #f87171);">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="legend-text">
+                        <h4>Financeiro ↔ Consultas</h4>
+                        <p>Gera folha de pagamento baseada em consultas realizadas</p>
+                    </div>
+                </div>
+                -->
+
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: linear-gradient(135deg, #6366f1, #818cf8);">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <div class="legend-text">
+                        <h4>Comunicação → Pacientes</h4>
+                        <p>Lembretes automáticos, follow-up e notificações integradas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Module connections (from -> to)
+            const connections = [
+                // Auth connects to all
+                { from: 'auth', to: 'scheduling', color: '#8b5cf6' },
+                { from: 'auth', to: 'queue', color: '#8b5cf6' },
+                { from: 'auth', to: 'clinical', color: '#8b5cf6' },
+                { from: 'auth', to: 'reports', color: '#8b5cf6' },
+                // { from: 'auth', to: 'financial', color: '#8b5cf6' }, // FINANCEIRO OCULTO
+                { from: 'auth', to: 'communication', color: '#8b5cf6' },
+                { from: 'auth', to: 'azure', color: '#8b5cf6' },
+                
+                // Scheduling to Queue
+                { from: 'scheduling', to: 'queue', color: '#06b6d4' },
+                
+                // Queue to Clinical
+                { from: 'queue', to: 'clinical', color: '#f59e0b' },
+                
+                // Clinical to Azure (bidirectional)
+                { from: 'clinical', to: 'azure', color: '#10b981' },
+                { from: 'azure', to: 'clinical', color: '#3b82f6' },
+                
+                // Clinical to Reports
+                { from: 'clinical', to: 'reports', color: '#10b981' },
+                
+                // Scheduling to Reports
+                { from: 'scheduling', to: 'reports', color: '#06b6d4' },
+                
+                // CONEXÕES FINANCEIRO OCULTAS
+                // { from: 'clinical', to: 'financial', color: '#10b981' },
+                // { from: 'financial', to: 'reports', color: '#ef4444' },
+                
+                // Scheduling to Communication
+            ];
+
+            // Draw connections
+            function drawConnections() {
+                const svg = document.getElementById('connectionsSvg');
+                const container = document.querySelector('.architecture-container');
+                
+                connections.forEach((conn, index) => {
+                    const fromEl = document.querySelector(`[data-id="${conn.from}"]`);
+                    const toEl = document.querySelector(`[data-id="${conn.to}"]`);
+                    
+                    if (fromEl && toEl) {
+                        const fromRect = fromEl.getBoundingClientRect();
+                        const toRect = toEl.getBoundingClientRect();
+                        const containerRect = container.getBoundingClientRect();
+                        
+                        const x1 = fromRect.left + fromRect.width / 2 - containerRect.left;
+                        const y1 = fromRect.top + fromRect.height / 2 - containerRect.top;
+                        const x2 = toRect.left + toRect.width / 2 - containerRect.left;
+                        const y2 = toRect.top + toRect.height / 2 - containerRect.top;
+                        
+                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', x1);
+                        line.setAttribute('y1', y1);
+                        line.setAttribute('x2', x2);
+                        line.setAttribute('y2', y2);
+                        line.setAttribute('stroke', conn.color);
+                        line.classList.add('connection-line');
+                        line.style.animationDelay = `${0.8 + index * 0.1}s`;
+                        
+                        svg.appendChild(line);
+                    }
+                });
+            }
+
+            // Call draw after modules are positioned
+            setTimeout(drawConnections, 500);
+
+            // Redraw on window resize
+            window.addEventListener('resize', () => {
+                const svg = document.getElementById('connectionsSvg');
+                svg.innerHTML = '';
+                drawConnections();
+            });
+
+            // Module click interaction
+            document.querySelectorAll('.module-box').forEach(module => {
+                module.addEventListener('click', function() {
+                    // Toggle active state
+                    this.classList.toggle('active');
+                    
+                    // Highlight connected lines
+                    const moduleId = this.getAttribute('data-id');
+                    const allLines = document.querySelectorAll('.connection-line');
+                    
+                    allLines.forEach(line => {
+                        line.classList.remove('active');
+                    });
+                    
+                    if (this.classList.contains('active')) {
+                        const relatedConnections = connections.filter(c => 
+                            c.from === moduleId || c.to === moduleId
+                        );
+                        
+                        // This is a simplified approach - in production you'd track line elements better
+                        allLines.forEach(line => {
+                            line.classList.add('active');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

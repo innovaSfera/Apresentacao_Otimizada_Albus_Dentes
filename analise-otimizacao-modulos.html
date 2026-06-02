@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Otimização - AlbusDente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #030012;
+            --primary-dark: #000000;
+            --secondary-color: #95ef4f;
+            --accent-color: #f59e0b;
+            --danger-color: #ef4444;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --bg-color: #ffffff;
+            --bg-gray: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .card-icon.success {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #059669;
+        }
+
+        .card-icon.info {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            color: #2563eb;
+        }
+
+        .card-icon.warning {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #d97706;
+        }
+
+        .card h3 {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .card .value.success {
+            color: var(--success-color);
+        }
+
+        .card .description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .module-section {
+            margin-bottom: 3rem;
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .module-header-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-color);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+        }
+
+        .module-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .module-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 16px 16px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-card {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .comparison-card.original {
+            border-color: #cbd5e1;
+            background: #f1f5f9;
+        }
+
+        .comparison-card.optimized {
+            border-color: var(--secondary-color);
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        .comparison-card .badge {
+            position: absolute;
+            top: -12px;
+            left: 1.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .comparison-card.original .badge {
+            background: #64748b;
+            color: white;
+        }
+
+        .comparison-card.optimized .badge {
+            background: var(--secondary-color);
+            color: var(--primary-dark);
+        }
+
+        .comparison-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .comparison-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-item .label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .comparison-item .value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .features-list {
+            margin-top: 2rem;
+        }
+
+        .features-list h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+        }
+
+        .feature-item i {
+            margin-top: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .feature-item.kept {
+            color: var(--success-color);
+        }
+
+        .feature-item.removed {
+            color: var(--danger-color);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .feature-item span {
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .savings-highlight {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .savings-highlight h4 {
+            font-size: 1.2rem;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .savings-highlight .amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+
+        .savings-highlight .percentage {
+            font-size: 1.2rem;
+            color: #92400e;
+            font-weight: 600;
+        }
+
+        .final-summary {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin-top: 3rem;
+        }
+
+        .final-summary h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .summary-table th,
+        .summary-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .summary-table th {
+            background: var(--bg-gray);
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+
+        .summary-table td {
+            font-size: 1rem;
+        }
+
+        .summary-table .number {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .summary-table .savings {
+            color: var(--success-color);
+        }
+
+        .summary-table tr:last-child {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            font-weight: 700;
+        }
+
+        .summary-table tr:last-child td {
+            border-bottom: none;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 968px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .module-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card .value {
+                font-size: 1.5rem;
+            }
+
+            .summary-table {
+                font-size: 0.875rem;
+            }
+
+            .summary-table th,
+            .summary-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+        }
+
+        .tag.new {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .tag.simplified {
+            background: #fef3c7;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-chart-line"></i> Análise de Otimização</h1>
+            <p class="subtitle">Proposta de Redução de Custos - Módulos RH e Estoque</p>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="card">
+                <div class="card-icon success">
+                    <i class="fas fa-piggy-bank"></i>
+                </div>
+                <h3>Economia Total</h3>
+                <div class="value success">R$ 26.811</div>
+                <p class="description">R$ 7.311 (otimização) + R$ 19.500 (remoção financeiro)</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon info">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Redução de Prazo</h3>
+                <div class="value">4 meses</div>
+                <p class="description">De 31 meses para aproximadamente 27 meses</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon warning">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h3>Projeto Total Otimizado</h3>
+                <div class="value">R$ 142.189</div>
+                <p class="description">Economia de 15,9% no custo total do projeto</p>
+            </div>
+        </div>
+
+        <!-- Economia com Remoção do Módulo Financeiro Completo -->
+        <div class="module-section">
+            <div class="module-header" style="cursor: pointer;" onclick="toggleAccordion(this)">
+                <div class="module-header-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div style="flex: 1;">
+                    <h2>Módulo 6 - Financeiro e Faturamento (REMOVIDO)</h2>
+                    <p>Decisão estratégica: remover módulo completo e usar sistemas especializados</p>
+                </div>
+                <div style="font-size: 1.5rem; color: white; transition: transform 0.3s ease;">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="module-content" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease; padding: 0 2rem;">
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.3rem;">
+                        <i class="fas fa-list-check"></i> Funcionalidades do Módulo Financeiro (que seriam desenvolvidas)
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span><strong>Contas a Pagar:</strong> Fornecedores, vencimentos, alertas, categorização, rateio entre unidades</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span><strong>Contas a Receber:</strong> Clientes/convênios, faturamento, baixas, conciliação bancária</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-file-invoice"></i>
+                            <span><strong>Geração de Boletos:</strong> Emissão automática, remessa bancária, retorno processado</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-receipt"></i>
+                            <span><strong>Emissão de NF-e:</strong> Integração com portais municipais, automação fiscal</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-calculator"></i>
+                            <span><strong>Folha de Pagamento:</strong> Cálculos fiscais completos (INSS, IRRF, FGTS)</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-university"></i>
+                            <span><strong>Arquivo CNAB:</strong> Geração automática 240/400 para todos os bancos</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-chart-pie"></i>
+                            <span><strong>Gross Profit:</strong> Faturamento x custos, margem de lucro detalhada</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-balance-scale"></i>
+                            <span><strong>Centro de Custos:</strong> Despesas por clínica, por área, por cliente/convênio</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-file-contract"></i>
+                            <span><strong>Contratos e Recorrências:</strong> Gestão de clientes fixos, faturamento recorrente</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span><strong>Multas e Advertências:</strong> Cálculo automático, relatórios para sindicato</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-calendar"></i>
+                            <span><strong>Fechamento Mensal:</strong> Consolidação automática de receitas e despesas</span>
+                        </div>
+                        <div class="feature-item removed" style="background: #fee2e2; padding: 1rem; border-radius: 8px; display: block;">
+                            <i class="fas fa-chart-line"></i>
+                            <span><strong>DRE Automático:</strong> Demonstrativo de Resultado do Exercício</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 3px solid #ef4444; border-radius: 16px; padding: 2.5rem; text-align: center; margin-top: 2rem;">
+                    <h3 style="color: #991b1b; font-size: 1.8rem; margin-bottom: 1rem;">
+                        <i class="fas fa-chart-line"></i> Economia com Remoção do Módulo Financeiro
+                    </h3>
+                    <div style="font-size: 4rem; font-weight: 900; color: #991b1b; margin-bottom: 0.5rem;">
+                        R$ 19.500
+                    </div>
+                    <div style="font-size: 1.3rem; color: #991b1b; font-weight: 600;">
+                        480 horas de desenvolvimento economizadas • 3 meses de prazo reduzidos
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulo RH -->
+        <div class="module-section">
+            <div class="module-header" style="cursor: pointer;" onclick="toggleAccordion(this)">
+                <div class="module-header-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div style="flex: 1;">
+                    <h2>Módulo 8 - RH & Departamento Pessoal</h2>
+                    <p>Gestão de colaboradores e folha de pagamento otimizada</p>
+                </div>
+                <div style="font-size: 1.5rem; color: white; transition: transform 0.3s ease;">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="module-content" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease; padding: 0 2rem;">
+                <div class="comparison-grid">
+                    <!-- Original -->
+                    <div class="comparison-card original">
+                        <span class="badge">Proposta Original</span>
+                        <h3>R$ 13.000</h3>
+                        <div class="comparison-item">
+                            <span class="label">Horas de Desenvolvimento</span>
+                            <span class="value">320h</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="label">Prazo de Entrega</span>
+                            <span class="value">2 meses</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="label">Complexidade</span>
+                            <span class="value">Alta</span>
+                        </div>
+                    </div>
+
+                    <!-- Optimized -->
+                    <div class="comparison-card optimized">
+                        <span class="badge">Proposta Otimizada</span>
+                        <h3>R$ 9.750</h3>
+                        <div class="comparison-item">
+                            <span class="label">Horas de Desenvolvimento</span>
+                            <span class="value">240h</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="label">Prazo de Entrega</span>
+                            <span class="value">6 semanas</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="label">Complexidade</span>
+                            <span class="value">Média</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Comparison -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div class="features-list">
+                        <h4><i class="fas fa-check-circle"></i> Funcionalidades Mantidas</h4>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Cadastro completo (20+ campos de colaboradores)</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Upload/Download de documentos (Azure Blob Storage)</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Registro de horas + integração com agendamento</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Cálculo simplificado de folha de pagamento</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>3 relatórios com visão micro do funcionário</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Exportação estruturada (Excel/PDF)</span>
+                        </div>
+                    </div>
+
+                    <div class="features-list">
+                        <h4><i class="fas fa-times-circle"></i> Funcionalidades Removidas</h4>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Engine complexa de gestão de benefícios (VA, VT, Convênio)</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Lançamentos automáticos ao módulo financeiro</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Portal do colaborador (self-service)</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Integração bancária automática (CNAB 240/400)</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Relatórios avançados de gestão (turnover, budget, etc)</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Cálculos complexos de impostos e descontos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="savings-highlight">
+                    <h4>💰 Economia no Módulo RH</h4>
+                    <div class="amount">R$ 3.250</div>
+                    <div class="percentage">25% de redução de custo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Módulo Estoque -->
+        <div class="module-section">
+            <div class="module-header" style="cursor: pointer;" onclick="toggleAccordion(this)">
+                <div class="module-header-icon">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <div style="flex: 1;">
+                    <h2>Módulo 9 - Gestão de Estoque</h2>
+                    <p>Controle de insumos e logística simplificada</p>
+                </div>
+                <div style="font-size: 1.5rem; color: white; transition: transform 0.3s ease;">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="module-content" style="max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease; padding: 0 2rem;">
+                <div class="comparison-grid">
+                    <!-- Original -->
+                    <div class="comparison-card original">
+                        <span class="badge">Proposta Original</span>
+                        <h3>R$ 19.500</h3>
+                        <div class="comparison-item">
+                            <span class="label">Horas de Desenvolvimento</span>
+                            <span class="value">480h</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="label">Prazo de Entrega</span>
+                            <span class="value">3 meses</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="label">Complexidade</span>
+                            <span class="value">Muito Alta</span>
+                        </div>
+                    </div>
+
+                    <!-- Optimized -->
+                    <div class="comparison-card optimized">
+                        <span class="badge">Proposta Otimizada</span>
+                        <h3>R$ 15.439</h3>
+                        <div class="comparison-item">
+                            <span class="label">Horas de Desenvolvimento</span>
+                            <span class="value">380h</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="label">Prazo de Entrega</span>
+                            <span class="value">9,5 semanas</span>
+                        </div>
+                        <div class="comparison-item">
+                            <span class="label">Complexidade</span>
+                            <span class="value">Média-Alta</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Comparison -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div class="features-list">
+                        <h4><i class="fas fa-check-circle"></i> Funcionalidades Mantidas</h4>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Cadastro completo de fornecedores + histórico de compras</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Categorização de produtos (2 níveis) <span class="tag simplified">Simplificado</span></span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Entrada manual de NF-e + anexo PDF</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Registro simples de solicitações + aprovação</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Saída de estoque + transferências entre clínicas</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Cadastro simples de ativos patrimoniais</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Histórico básico + auditoria de movimentações</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>6 relatórios essenciais + dashboard executivo</span>
+                        </div>
+                        <div class="feature-item kept">
+                            <i class="fas fa-check"></i>
+                            <span>Sistema de alertas (estoque mínimo, vencimentos)</span>
+                        </div>
+                    </div>
+
+                    <div class="features-list">
+                        <h4><i class="fas fa-times-circle"></i> Funcionalidades Removidas</h4>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Parser automático de XML da NF-e + integração SEFAZ</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Workflow engine complexo (múltiplos níveis de aprovação)</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Rastreamento GPS do motorista em tempo real</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Sistema de fotos de conferência obrigatórias</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Controle patrimonial avançado (depreciação, QR Code, RFID)</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Controle de lote/validade com FIFO automático</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>6 relatórios adicionais não essenciais</span>
+                        </div>
+                        <div class="feature-item removed">
+                            <i class="fas fa-times"></i>
+                            <span>Categorização multinível complexa (3+ níveis + tags)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="savings-highlight">
+                    <h4>💰 Economia no Módulo Estoque</h4>
+                    <div class="amount">R$ 4.061</div>
+                    <div class="percentage">21% de redução de custo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Summary -->
+        <div class="final-summary">
+            <h2><i class="fas fa-calculator"></i> Resumo Final da Otimização</h2>
+            
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Módulo</th>
+                        <th>Custo Original</th>
+                        <th>Custo Otimizado</th>
+                        <th>Economia</th>
+                        <th>% Redução</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-users"></i> RH & Departamento Pessoal (Otimizado)</td>
+                        <td class="number">R$ 13.000</td>
+                        <td class="number">R$ 9.750</td>
+                        <td class="number savings">-R$ 3.250</td>
+                        <td class="number savings">-25%</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-boxes"></i> Gestão de Estoque (Otimizado)</td>
+                        <td class="number">R$ 19.500</td>
+                        <td class="number">R$ 15.439</td>
+                        <td class="number savings">-R$ 4.061</td>
+                        <td class="number savings">-21%</td>
+                    </tr>
+                    <tr style="background: #fee2e2; font-weight: 600;">
+                        <td><i class="fas fa-dollar-sign"></i> Módulo Financeiro e Faturamento (REMOVIDO)</td>
+                        <td class="number">R$ 19.500</td>
+                        <td class="number" style="color: #991b1b;">R$ 0</td>
+                        <td class="number savings" style="color: #991b1b;">-R$ 19.500</td>
+                        <td class="number savings" style="color: #991b1b;">-100%</td>
+                    </tr>
+                    <tr style="background: #f1f5f9;">
+                        <td><strong>SUBTOTAL (Otimizações)</strong></td>
+                        <td class="number"><strong>R$ 32.500</strong></td>
+                        <td class="number"><strong>R$ 25.189</strong></td>
+                        <td class="number savings"><strong>-R$ 7.311</strong></td>
+                        <td class="number savings"><strong>-22,5%</strong></td>
+                    </tr>
+                    <tr style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); font-size: 1.15rem;">
+                        <td><strong><i class="fas fa-trophy"></i> ECONOMIA TOTAL GERAL</strong></td>
+                        <td class="number"><strong>R$ 52.000</strong></td>
+                        <td class="number"><strong>R$ 25.189</strong></td>
+                        <td class="number savings" style="font-size: 1.6rem; color: #059669;"><strong>-R$ 26.811</strong></td>
+                        <td class="number savings" style="color: #059669;"><strong>-51,6%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid var(--secondary-color); border-radius: 12px; padding: 2rem; margin-top: 2rem;">
+                <h3 style="text-align: center; color: var(--primary-color); font-size: 1.5rem; margin-bottom: 1rem;">
+                    <i class="fas fa-trophy"></i> Impacto no Projeto Total
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center;">
+                    <div>
+                        <div style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Custo Original</div>
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--primary-color);">R$ 169.000</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">31 meses</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Custo Otimizado</div>
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--success-color);">R$ 142.189</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">27 meses</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Economia Total</div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--success-color);">R$ 26.811</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">4 meses economizados</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.875rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Redução Total</div>
+                        <div style="font-size: 2.5rem; font-weight: 800; color: var(--success-color);">15,9%</div>
+                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">Custo + Prazo</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 12px; border: 2px dashed #10b981;">
+                    <h4 style="color: #065f46; margin-bottom: 1rem; text-align: center;">
+                        <i class="fas fa-calculator"></i> Breakdown da Economia
+                    </h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; text-align: center;">
+                        <div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Otimização RH</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #059669;">-R$ 3.250</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Otimização Estoque</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #059669;">-R$ 4.061</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Remoção Financeiro</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: #991b1b;">-R$ 19.500</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1.5rem; background: #fef3c7; border-radius: 12px; border-left: 4px solid #f59e0b;">
+                <h4 style="color: #92400e; margin-bottom: 1rem; font-size: 1.1rem;">
+                    <i class="fas fa-lightbulb"></i> Estratégia de Otimização Aplicada
+                </h4>
+                <ul style="margin: 0; padding-left: 1.5rem; color: #92400e;">
+                    <li style="margin-bottom: 0.5rem;"><strong>Foco no essencial:</strong> Mantidas funcionalidades que entregam 80% do valor com menos custo</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>Remoção de over-engineering:</strong> Eliminadas features complexas de baixo ROI (GPS, parsers XML, workflows complexos)</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>Decisão estratégica:</strong> Módulo financeiro completo removido - integração com sistema especializado</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>Integração inteligente:</strong> Aproveitamento de Excel, WhatsApp e sistemas contábeis já em uso</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>Evolutividade preservada:</strong> Possibilidade de adicionar features removidas em Fase 2 se necessário</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>Redução de risco:</strong> Menos código = menos bugs = menos manutenção</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 3rem; padding: 2rem; color: var(--text-secondary);">
+            <p style="font-size: 0.875rem;">
+                <i class="fas fa-rocket"></i> Powered by <strong style="color: var(--primary-color);">InnovaSfera</strong>
+            </p>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem;">
+                Documento gerado em: <strong>01 de Junho de 2026</strong>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Animação ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.module-section, .card, .final-summary').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Animação nos números ao aparecer na tela
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value.toLocaleString('pt-BR');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger animation when cards are visible
+        const valueObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    const valueElement = entry.target.querySelector('.value');
+                    if (valueElement && !valueElement.dataset.animated) {
+                        const text = valueElement.textContent.replace(/[^\d]/g, '');
+                        const value = parseInt(text);
+                        if (!isNaN(value)) {
+                            valueElement.dataset.animated = 'true';
+                            animateValue(valueElement, 0, value, 1500);
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.card').forEach(card => {
+            valueObserver.observe(card);
+        });
+
+        // Função para toggle accordion
+        function toggleAccordion(header) {
+            const moduleSection = header.parentElement;
+            const content = header.nextElementSibling;
+            const chevron = header.querySelector('.fa-chevron-down');
+            
+            // Toggle open/close
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                // Fechar
+                content.style.maxHeight = '0px';
+                content.style.padding = '0 2rem';
+                chevron.style.transform = 'rotate(0deg)';
+            } else {
+                // Abrir
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.padding = '2rem';
+                chevron.style.transform = 'rotate(180deg)';
+                
+                // Ajustar altura quando conteúdo carrega
+                setTimeout(() => {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }, 100);
+            }
+        }
+
+        // Abrir primeiro accordion por padrão
+        window.addEventListener('DOMContentLoaded', () => {
+            const firstHeader = document.querySelector('.module-header[onclick]');
+            if (firstHeader) {
+                toggleAccordion(firstHeader);
+            }
+        });
+    </script>
+</body>
+</html>
