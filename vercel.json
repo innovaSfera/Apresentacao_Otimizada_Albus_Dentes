@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/apresentacao", "destination": "/apresentacao-albusdente.html" },
+    { "source": "/dashboard", "destination": "/apresentacao-albusdente.html" },
+    { "source": "/login", "destination": "/index.html" }
+  ]
+}
